@@ -33,12 +33,10 @@ export const MagicalContext = createContext<MagicalContext>({
 
 export const withWizardContext = <WrappedComponentProps = any>(
   Component: React.ComponentType<WrappedComponentProps>,
-) => {
+): React.ComponentType => {
   const wizardProps = useContext(MagicalContext);
 
-  return (props: WrappedComponentProps) => createElement(Component, { ...wizardProps, ...props });
+  return (props: WrappedComponentProps): JSX.Element => createElement(Component, { ...wizardProps, ...props });
 };
 
-export const useWizardContext = () => {
-  return useContext(MagicalContext);
-};
+export const useWizardContext = (): MagicalContext => useContext(MagicalContext);

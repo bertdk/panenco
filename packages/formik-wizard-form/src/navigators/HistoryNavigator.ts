@@ -1,12 +1,15 @@
-import { INavigator, INavigatorConstructor, NavigatableStepMeta } from '../the-boy-who-lived';
+import { Navigator, NavigatorConstructor, NavigatableStepMeta } from '../the-boy-who-lived';
 
-export class HistoryNavigator implements INavigator {
+export class HistoryNavigator implements Navigator {
   static history: any;
+
   currentStep: any;
+
   unlisten: () => void;
+
   steps: any[];
 
-  static setHistory(history): INavigatorConstructor {
+  static setHistory(history): NavigatorConstructor {
     HistoryNavigator.history = history;
 
     return HistoryNavigator;
@@ -15,7 +18,7 @@ export class HistoryNavigator implements INavigator {
   constructor(steps: NavigatableStepMeta<any>[], initialStepIndex: number) {
     if (!HistoryNavigator.history) {
       throw new ReferenceError(
-        `You probably didn't set "history" object via HistoryNavigator.setHistory() before class usage.`,
+        'You probably didn\'t set "history" object via HistoryNavigator.setHistory() before class usage.',
       );
     }
     const { history } = HistoryNavigator;
@@ -34,11 +37,11 @@ export class HistoryNavigator implements INavigator {
     }
   }
 
-  getStepUrl(stepIndex: number) {
+  getStepUrl(stepIndex: number): string {
     return this.steps[stepIndex].Step?.RoutePath ?? `#step-${stepIndex + 1}`;
   }
 
-  mount(goTo) {
+  mount(goTo): void {
     this.unlisten = HistoryNavigator.history.listen((location, action) => {
       if (action === 'POP') {
         goTo(location.state.stepIdx, true);
@@ -46,11 +49,11 @@ export class HistoryNavigator implements INavigator {
     });
   }
 
-  unmount() {
+  unmount(): void {
     this.unlisten();
   }
 
-  navigate(prevStep: number, nextStep: number) {
+  navigate(prevStep: number, nextStep: number): void {
     const { history } = HistoryNavigator;
 
     if (prevStep < nextStep && !this.steps[nextStep].touched) {

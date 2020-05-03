@@ -16,11 +16,11 @@ export type NavigatableStepMeta<Values> = {
   Step: React.ComponentType<any> & WizardStepContainer<Values>;
 } & WizardStepMeta;
 
-export interface INavigatorConstructor<Values = any> {
-  new (steps: NavigatableStepMeta<Values>[], initialStep: number): INavigator;
+export interface NavigatorConstructor<Values = any> {
+  new (steps: NavigatableStepMeta<Values>[], initialStep: number): Navigator;
 }
 
-export interface INavigator {
+export interface Navigator {
   mount(goTo: (n: number, fromNavigator?: boolean) => void): void;
   unmount(): void;
   navigate(prevStepIndex: number, nextStepIndex: number): void;
@@ -34,7 +34,7 @@ export interface WizardProps<Values> extends FormikConfig<Values> {
     } & WizardStepMeta,
   ) => React.ReactNode | React.ReactNode;
   component?: React.ComponentType<any>;
-  navigator?: INavigatorConstructor;
+  navigator?: NavigatorConstructor;
   initialStep?: number;
 }
 
@@ -45,8 +45,10 @@ export interface WizardState {
 
 class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, WizardState> {
   stepRef: any;
+
   stepsMeta: WizardStepMeta[];
-  navigator: INavigator;
+
+  navigator: Navigator;
 
   static displayName = '🧙‍♂️WizardForm';
 
@@ -63,7 +65,7 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
 
     const { navigator: Navigator } = props;
 
-    if (!!Navigator) {
+    if (Navigator) {
       const {
         props: { steps },
         state: { currentStep },
@@ -76,74 +78,37 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
     }
   }
 
-  createStepsMeta(steps: (React.ComponentType<any> & WizardStepContainer<Values>)[]) {
-    return steps.map((Step, stepIndex) => ({
-      stepIndex,
-      title: Step.Title ?? '',
-      noReturn: Step.NoReturn ?? false,
-      touched: false,
-    }));
+  componentDidMount(): void {
+    if (this.navigator) this.navigator.mount(this.toStepFromNavigator); // NAVIGATOR BACK BUTTON LISTENER
   }
 
-  componentDidUpdate(prevProps: WizardProps<Values>, prevState: WizardState) {
-    if (prevProps.steps !== this.props.steps || prevProps.steps.length !== this.props.steps.length) {
-      this.stepsMeta = this.createStepsMeta(this.props.steps);
+  componentDidUpdate(prevProps: WizardProps<Values>, prevState: WizardState): void {
+    const { steps } = this.props;
+    const { currentStep } = this.state;
+
+    if (prevProps.steps !== steps || prevProps.steps.length !== steps.length) {
+      this.stepsMeta = this.createStepsMeta(steps);
     }
 
-    if (prevState.currentStep !== this.state.currentStep) {
+    if (prevState.currentStep !== currentStep) {
       this.stepsMeta[prevState.currentStep].touched = true;
     }
   }
 
-  componentDidMount() {
-    this.navigator?.mount(this.toStepFromNavigator); // NAVIGATOR BACK BUTTON LISTENER
+  componentWillUnmount(): void {
+    if (this.navigator) this.navigator.unmount(); // NAVIGATOR LISTENER UNREGISTER
   }
 
-  componentWillUnmount() {
-    this.navigator?.unmount(); // NAVIGATOR LISTENER UNREGISTER
-  }
-
-  setWizardState = (state: any, cb?: () => void) => {
+  setWizardState = (state: any, cb?: () => void): void => {
     this.setState(
-      currentState => ({
-        magicState: isFunction(state)
-          ? state(currentState.magicState)
-          : Object.assign({}, currentState.magicState, state),
+      (currentState) => ({
+        magicState: isFunction(state) ? state(currentState.magicState) : { ...currentState.magicState, ...state },
       }),
       cb,
     );
   };
 
-  isTransgressionAllowed(step: number): boolean {
-    const { currentStep } = this.state;
-
-    if (step < 0 || step >= this.props.steps.length) {
-      console.error(`You can only go to steps 0 - ${this.props.steps.length}`);
-      return false;
-    }
-
-    // Traveling back
-    if (step < currentStep) {
-      for (let i = step; i < currentStep; i += 1) {
-        if (this.props.steps[i].NoReturn) {
-          console.error(`Transgression is prohibited over "point of no return"`);
-          return false;
-        }
-      }
-    } else {
-      // Traveling forward
-      for (let i = currentStep + 1; i <= step; i += 1) {
-        if (this.props.steps[i && i - 1].NoReturn) {
-          console.error(`Transgression is prohibited over "point of no return"`);
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
-
-  toStep = (step: number) => {
+  toStep = (step: number): void => {
     const { currentStep } = this.state;
 
     if (step === currentStep || !this.isTransgressionAllowed(step)) return;
@@ -153,12 +118,12 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
         currentStep: step,
       },
       () => {
-        this.navigator?.navigate(currentStep, step);
+        if (this.navigator) this.navigator.navigate(currentStep, step);
       },
     );
   };
 
-  toStepFromNavigator = (step: number) => {
+  toStepFromNavigator = (step: number): void => {
     const { currentStep } = this.state;
 
     if (step === currentStep || !this.isTransgressionAllowed(step)) return;
@@ -168,19 +133,24 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
     });
   };
 
-  toFirstStep = () => this.toStep(0);
+  toFirstStep = (): void => this.toStep(0);
 
-  toLastStep = () => this.toStep(this.props.steps.length - 1);
+  toLastStep = (): void => {
+    const { steps } = this.props;
+    return this.toStep(steps.length - 1);
+  };
 
   next = () => {
     const { currentStep: prevStep } = this.state;
+    const { steps } = this.props;
 
     this.setState(
-      state => ({
-        currentStep: state.currentStep + 1 < this.props.steps.length ? state.currentStep + 1 : state.currentStep,
+      (state) => ({
+        currentStep: state.currentStep + 1 < steps.length ? state.currentStep + 1 : state.currentStep,
       }),
       () => {
-        this.navigator?.navigate(prevStep, this.state.currentStep);
+        const { currentStep } = this.state;
+        if (this.navigator) this.navigator.navigate(prevStep, currentStep);
       },
     );
   };
@@ -190,29 +160,71 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
     this.toStep(currentStep - 1);
   };
 
-  onSubmit = async (values: Values, formikBag: FormikHelpers<Values>) => {
+  onSubmit = async (values: Values, formikBag: FormikHelpers<Values>): Promise<any> => {
+    const { steps, onSubmit } = this.props;
+    const { currentStep } = this.state;
     if (this.stepRef.current?.onSubmit) {
       await this.stepRef.current.onSubmit(values, formikBag);
     }
-    if (this.state.currentStep + 1 < this.props.steps.length) {
+    if (currentStep + 1 < steps.length) {
       this.next();
-    } else if (!!this.props.onSubmit) {
-      await this.props.onSubmit(values, formikBag);
+    } else if (onSubmit) {
+      await onSubmit(values, formikBag);
     }
   };
 
-  onReset = () => {
-    this.stepsMeta = this.createStepsMeta(this.props.steps);
+  onReset = (): void => {
+    const { steps } = this.props;
+    this.stepsMeta = this.createStepsMeta(steps);
     this.setState({
       currentStep: 0,
       magicState: undefined,
     });
   };
 
-  render() {
+  createStepsMeta = (steps: (React.ComponentType<any> & WizardStepContainer<Values>)[]): WizardStepMeta[] => {
+    return steps.map((Step, stepIndex) => ({
+      stepIndex,
+      title: Step.Title ?? '',
+      noReturn: Step.NoReturn ?? false,
+      touched: false,
+    }));
+  };
+
+  isTransgressionAllowed(step: number): boolean {
+    const { currentStep } = this.state;
+    const { steps } = this.props;
+
+    if (step < 0 || step >= steps.length) {
+      console.error(`You can only go to steps 0 - ${steps.length}`);
+      return false;
+    }
+
+    // Traveling back
+    if (step < currentStep) {
+      for (let i = step; i < currentStep; i += 1) {
+        if (steps[i].NoReturn) {
+          console.error('Transgression is prohibited over "point of no return"');
+          return false;
+        }
+      }
+    } else {
+      // Traveling forward
+      for (let i = currentStep + 1; i <= step; i += 1) {
+        if (steps[i && i - 1].NoReturn) {
+          console.error('Transgression is prohibited over "point of no return"');
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  render(): JSX.Element {
     const { currentStep, magicState } = this.state;
 
-    const { onSubmit, children, component, steps, ...props } = this.props;
+    const { children, component, steps, ...props } = this.props;
 
     const { next, back, toStep, toFirstStep, toLastStep, stepRef: ref, setWizardState, stepsMeta } = this;
 
@@ -225,7 +237,7 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
       toStep,
       toFirstStep,
       toLastStep,
-      get wizardState() {
+      get wizardState(): any {
         return magicState;
       },
     };
@@ -241,20 +253,17 @@ class HarryPotter<Values = any> extends React.Component<WizardProps<Values>, Wiz
           enableReinitialize
           {...props}
         >
-          {formikBag => {
-            const currentStepElement = React.createElement(
-              steps[currentStep],
-              Object.assign({ ref }, magicBag, formikBag),
-            );
+          {(formikBag) => {
+            const currentStepElement = React.createElement(steps[currentStep], { ref, ...magicBag, ...formikBag });
 
-            if (!!component) {
+            if (component) {
               return React.createElement(component, {
                 step: currentStepElement,
                 ...stepsMeta[currentStep],
               });
             }
 
-            if (!!children) {
+            if (children) {
               return isFunction(children)
                 ? children({ step: currentStepElement, ...stepsMeta[currentStep] })
                 : children;
