@@ -19,8 +19,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint src --ext=jsx,ts,tsx --fix",
-      "git add"
+      "eslint src --ext=jsx,ts,tsx --fix"
     ]
   },
   "peerDependencies": {

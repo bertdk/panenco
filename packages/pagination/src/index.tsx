@@ -9,7 +9,7 @@ interface ComponentState {
   filter?: string;
 }
 
-const withTable = WrappedComponent =>
+const withTable = (WrappedComponent) =>
   class extends React.Component<any, ComponentState> {
     static displayName = `withTable(${WrappedComponent})`; // eslint-disable-line
 
@@ -29,7 +29,7 @@ const withTable = WrappedComponent =>
     }
 
     handleSort(sort, direction) {
-      this.setState(state => {
+      this.setState((state) => {
         if (direction === 'desc') {
           return {
             sort: {
