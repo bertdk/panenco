@@ -3,10 +3,30 @@ import fs from 'fs-extra';
 import cheerio from 'cheerio';
 import SVGO from 'svgo';
 
+function isValidId(id) {
+  const re = /^[A-Za-z]+[\w-_:.]*$/;
+  return re.test(id);
+}
+
+function sanitizeId(text) {
+  if (isValidId(text)) return text;
+
+  let id = text
+    .toLowerCase()
+    .replace(/(\s)+/g, '_')
+    .replace(/[^\w-_:.]/gi, '');
+
+  if (!/^[A-Za-z]+/.test(id)) {
+    id = `sprite_${id}`;
+  }
+
+  return id;
+}
+
 function createSymbol(code, id) {
   const markup = cheerio.load(code, { xmlMode: true });
   const svgMarkup = markup('svg');
-  const symbolId = svgMarkup.find('title').text() || id;
+  const symbolId = sanitizeId(svgMarkup.find('title').text() || id);
   const viewBox = svgMarkup.attr('viewBox');
 
   markup('svg').replaceWith('<symbol/>');
