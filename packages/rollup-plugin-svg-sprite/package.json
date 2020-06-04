@@ -1,6 +1,6 @@
 {
   "name": "@panenco/rollup-plugin-svg-sprite",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Rollup plugin for creation of SVG spritesheet",
   "author": "Panenco <info@panenco.com>",
   "homepage": "https://github.com/Panenco/panenco#readme",

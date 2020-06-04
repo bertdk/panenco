@@ -87,7 +87,7 @@ export default function svgSprite(options = {}) {
       convertedSvgs.set(id, content);
 
       return {
-        code: `export default {id: '${symbolId}_usage', viewBox: '${viewBox}', url: '${publicPath}${spriteFilename}#${symbolId}', toString() { return this.url },}`,
+        code: `export default {id: '${symbolId}', viewBox: '${viewBox}', url: '${publicPath}${spriteFilename}#${symbolId}', toString() { return this.url },}`,
       };
     },
     async writeBundle() {
