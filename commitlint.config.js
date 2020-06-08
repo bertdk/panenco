@@ -13,6 +13,7 @@ module.exports = {
         'formik-form-field',
         'pagination',
         'pwa-utils',
+        'rollup-plugin-svg-sprite',
       ],
     ],
   },
