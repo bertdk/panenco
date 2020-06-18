@@ -5,81 +5,16 @@ import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute, NavigationRoute, setCatchHandler } from 'workbox-routing';
 import { NetworkOnly, StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { BackgroundSyncPlugin } from 'workbox-background-sync';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 const defaultExpirationTime = {
   api: 24 * 60 * 60, // 24 hours
-  bgSync: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
   googleFonts: 60 * 60 * 24 * 365, // 1 Year
   images: 30 * 24 * 60 * 60, // 30 Days
 };
 
-export function initServiceWorker({ CACHE_PREFIX, baseURL, expiration = defaultExpirationTime }) {
-  /*
-   * RegExp object used to register cache strategies over it's route path
-   */
-
-  const apiRegExp = new RegExp(`^${baseURL}`);
-
-  /*
-   * API GET responses caching
-   */
-
-  registerRoute(
-    apiRegExp,
-    new StaleWhileRevalidate({
-      cacheName: `${CACHE_PREFIX}-api`,
-      plugins: [
-        new ExpirationPlugin({
-          maxAgeSeconds: expiration.api,
-        }),
-      ],
-    }),
-  );
-
+export function initServiceWorker({ CACHE_PREFIX, expiration = defaultExpirationTime }) {
   setCatchHandler(new NetworkOnly());
-
-  /*
-   * Backgroud sync plugin rules.
-   * Is used for making queued requests on network loss later.
-   */
-
-  const bgSyncPlugin = new BackgroundSyncPlugin(`${CACHE_PREFIX}-deffered-api-queue`, {
-    maxRetentionTime: expiration.bgSync,
-  });
-
-  registerRoute(
-    apiRegExp,
-    new NetworkOnly({
-      plugins: [bgSyncPlugin],
-    }),
-    'POST',
-  );
-
-  registerRoute(
-    apiRegExp,
-    new NetworkOnly({
-      plugins: [bgSyncPlugin],
-    }),
-    'PUT',
-  );
-
-  registerRoute(
-    apiRegExp,
-    new NetworkOnly({
-      plugins: [bgSyncPlugin],
-    }),
-    'PATCH',
-  );
-
-  registerRoute(
-    apiRegExp,
-    new NetworkOnly({
-      plugins: [bgSyncPlugin],
-    }),
-    'DELETE',
-  );
 
   /*
    * Static assets cache rules
@@ -103,15 +38,16 @@ export function initServiceWorker({ CACHE_PREFIX, baseURL, expiration = defaultE
           statuses: [0, 200],
         }),
         new ExpirationPlugin({
-          maxAgeSeconds: expiration.googleFonts,
-          maxEntries: 30,
+          maxAgeSeconds: expiration.googleFonts || defaultExpirationTime.googleFonts,
         }),
       ],
     }),
   );
 
   registerRoute(
-    /\.(?:png|gif|jpg|jpeg|webp|svg)$/,
+    ({ url }) => {
+      return url.host !== self.location.host && /\.(?:png|gif|jpg|jpeg|webp|svg)$/.test(url.pathname);
+    },
     new CacheFirst({
       cacheName: `${CACHE_PREFIX}-images`,
       plugins: [
@@ -119,8 +55,7 @@ export function initServiceWorker({ CACHE_PREFIX, baseURL, expiration = defaultE
           statuses: [0, 200], // saving opaque responses as well
         }),
         new ExpirationPlugin({
-          maxEntries: 60,
-          maxAgeSeconds: expiration.images,
+          maxAgeSeconds: expiration.images || defaultExpirationTime.images,
         }),
       ],
     }),
@@ -148,4 +83,14 @@ export function initServiceWorker({ CACHE_PREFIX, baseURL, expiration = defaultE
 
     self.addEventListener('message', handleMessage);
   }
+
+  /*
+   * Handling errors of service worker environment
+   */
+
+  self.addEventListener('error', (e) => {
+    if (process.env.DEBUG) {
+      console.log(e.filename, e.lineno, e.colno, e.message);
+    }
+  });
 }

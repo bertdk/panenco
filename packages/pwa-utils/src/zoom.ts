@@ -15,13 +15,17 @@ export function disablePinchToZoom(): () => void {
 }
 
 export function disableDoubletapZoom(): () => void {
-  let lastTouchEnd = null;
+  let lastTouchEnd: any = null;
 
   const handleTouchend = (event) => {
     const timestamp = new Date();
-    if (timestamp.getTime() - lastTouchEnd <= 300) {
-      event.preventDefault();
+
+    if (lastTouchEnd) {
+      if (timestamp.getTime() - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
     }
+
     lastTouchEnd = timestamp;
   };
 

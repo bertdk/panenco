@@ -12,7 +12,7 @@ const paths = {};
 paths.root = path.resolve(__dirname, '.');
 paths.nodeModules = path.join(paths.root, 'node_modules');
 paths.src = path.join(paths.root, 'src');
-paths.entryPoint = path.join(paths.src, 'index.tsx');
+paths.entryPoint = path.join(paths.src, 'index.ts');
 
 const external = Object.keys(packageJson.peerDependencies).concat(['util']);
 

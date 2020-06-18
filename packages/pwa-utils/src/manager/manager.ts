@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Workbox } from 'workbox-window/Workbox';
 import { messageSW } from 'workbox-window/messageSW';
-
-import { ServiceWorkerContext } from './context';
+import { doesDeviceSupportPWA } from '../device-support';
 
 import { onVisibilityChange } from '../helpers';
-import { SKIP_WAITING, GET_VERSION } from '../constants';
+import { SKIP_WAITING, GET_VERSION } from '../service-worker/constants';
+import { ServiceWorkerContext } from './context';
+
+import { BgSyncManager } from './background-sync-manager';
 
 declare global {
   interface Window {
@@ -13,15 +15,24 @@ declare global {
   }
 }
 
-export type SWMProps = {
+type ServiceWorkerManagerProps = {
   children: React.ReactNode;
   scope: string;
-  useCustomInstall?: boolean;
+  useCustomInstall: boolean;
+  backgroundResponseHandler?: () => void;
 };
 
-export class ServiceWorkerManager extends React.Component<SWMProps, any> {
+type ServiceWorkerManagerState = {
+  isUpdateAvaliable: boolean;
+  appInstallPrompt: any;
+  isUpdating: boolean;
+  version?: any;
+};
+
+export class ServiceWorkerManager extends React.Component<ServiceWorkerManagerProps, ServiceWorkerManagerState> {
   static defaultProps = {
     scope: '/',
+    useCustomInstall: true,
   };
 
   waitingServiceWorker: any;
@@ -73,7 +84,7 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
     this.removeVisibilityChangeListener();
   }
 
-  handleServiceWorkerWaiting = (event) => {
+  handleServiceWorkerWaiting = (event): void => {
     if (process.env.DEBUG) {
       if (event.type === 'waiting') {
         console.groupCollapsed('Service worker is waiting for activation:');
@@ -97,7 +108,7 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
     }
   };
 
-  handleUpdateAccept = () => {
+  handleUpdateAccept = (): void => {
     const {
       state: { isUpdating },
       waitingServiceWorker,
@@ -114,7 +125,7 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
     });
   };
 
-  getServiceWorkerVersion = async (serviceWorker = null): Promise<string> => {
+  getServiceWorkerVersion = async (serviceWorker: any = null): Promise<any> => {
     if (serviceWorker instanceof ServiceWorker) {
       return messageSW(serviceWorker, { type: GET_VERSION });
     }
@@ -134,6 +145,10 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
 
   manualUpdate = (): void => {
     this.wb.update();
+  };
+
+  exposedMessageSW = (...args) => {
+    return this.wb.messageSW(...args);
   };
 
   interceptInstallPrompt(): void {
@@ -170,11 +185,12 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
     }
   }
 
-  render(): JSX.Element {
-    const { children } = this.props;
+  render(): React.ReactNode {
+    const { children, backgroundResponseHandler } = this.props;
     const {
       handleUpdateAccept,
       manualUpdate,
+      exposedMessageSW,
       state: { isUpdateAvaliable, appInstallPrompt, isUpdating, version },
     } = this;
 
@@ -187,6 +203,13 @@ export class ServiceWorkerManager extends React.Component<SWMProps, any> {
       version,
     };
 
-    return React.createElement(ServiceWorkerContext.Provider, { value: contextValue }, children);
+    return React.createElement(
+      ServiceWorkerContext.Provider,
+      { value: contextValue },
+      doesDeviceSupportPWA() &&
+        backgroundResponseHandler &&
+        React.createElement(BgSyncManager, { responseHandler: backgroundResponseHandler, messageSW: exposedMessageSW }),
+      children,
+    );
   }
 }

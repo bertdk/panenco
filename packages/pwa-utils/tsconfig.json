@@ -12,7 +12,7 @@
     "sourceMap": true,
     "rootDir": "./src",
     "checkJs": false,
-    "allowJs": false,
+    "allowJs": true,
     "removeComments": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
