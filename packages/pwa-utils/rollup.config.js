@@ -3,7 +3,7 @@ import path from 'path';
 import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
+// import replace from 'rollup-plugin-replace';
 
 import packageJson from './package.json';
 
@@ -34,9 +34,9 @@ export default {
   ],
   external,
   plugins: [
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
+    // replace({
+    //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    // }),
     resolve({
       browser: true,
       extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
