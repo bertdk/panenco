@@ -13,6 +13,7 @@ module.exports = {
         'formik-form-field',
         'pagination',
         'rollup-plugin-svg-sprite',
+        'ui',
       ],
     ],
   },

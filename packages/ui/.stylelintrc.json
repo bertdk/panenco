@@ -1,0 +1,33 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-order"],
+  "syntax": "scss",
+  "rules": {
+    "order/properties-alphabetical-order": true,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "extend",
+          "include",
+          "mixin",
+          "for",
+          "if",
+          "else",
+          "each",
+          "function",
+          "return"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global", "export"]
+      }
+    ],
+    "property-no-unknown": null,
+    "property-case": null,
+    "declaration-empty-line-before": null
+  }
+}
