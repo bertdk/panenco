@@ -34,15 +34,16 @@ export default decorator('Table', TableDocs, TableReadme).add('Table', () => {
   const data = React.useMemo(() => makeData(20), []);
 
   class HeaderCreator {
-    constructor(header, accessor, disableSortBy, priority) {
+    constructor(header, accessor, disableSortBy, priority, props) {
       this.Header = header;
       this.accessor = accessor;
       this.disableSortBy = disableSortBy;
       this.priority = priority;
+      this.props = props;
     }
   }
 
-  const firstName = new HeaderCreator('First Name', 'firstName', false, 6);
+  const firstName = new HeaderCreator('First Name', 'firstName', false, 6, { overflowwidth: 150 });
   const lastName = new HeaderCreator('Last Name', 'lastName', false, 5);
   const status = new HeaderCreator('Status', 'status', true, 4);
   const visits = new HeaderCreator('Visits', 'visits', true, 3);

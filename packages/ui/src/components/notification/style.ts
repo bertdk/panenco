@@ -81,8 +81,8 @@ export const StyledNotificationContainer = styled(ToastContainer)`
       margin-top: 16px;
       color: ${(props: any): string => props.theme.colors.secondary};
       &--icon {
-        width: 100%;
-        height: 100%;
+        width: 16px;
+        height: 16px;
       }
     }
   }

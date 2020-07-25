@@ -6,7 +6,7 @@ import { useTheme, useMode } from 'utils/hooks';
 import { useCombinedRefs } from 'utils/hooks/combinedrefs';
 
 import cx from 'classnames';
-import { Styles } from './style';
+import { Styles, StyledTd } from './style';
 
 const { useSortBy, useTable } = ReactTable;
 
@@ -82,17 +82,16 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(
                   <>
                     {Boolean(currentPriority) && <td />}
                     {headerGroup.headers.map((column) => {
-                      const { isSortedDesc, canSort, getHeaderProps, render } = column;
+                      const { isSortedDesc, canSort, getHeaderProps, render, props } = column;
                       if (column.priority < currentPriority) {
                         return null;
                       }
 
                       return (
-                        <th {...getHeaderProps()} className="header" key={idGenerator()}>
+                        <th {...getHeaderProps()} className="header" key={idGenerator()} {...props}>
                           <div className="tableHeaderWrapper">
                             <Text weight={theme.typography.weights.bold}>{render('Header')}</Text>
                             <span className="tableHeaderWrapperSortedBox">
-                              {/* eslint-disable */}
                               {canSort ? (
                                 <>
                                   <Icon
@@ -115,7 +114,6 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(
                               ) : (
                                 ''
                               )}
-                              {/* eslint-enable */}
                             </span>
                           </div>
                         </th>
@@ -153,11 +151,17 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(
                       </td>
                     )}
                     {row.cells.map((cell) => {
-                      const isRenderColumn = cell.column.priority >= currentPriority;
+                      const { priority, props } = cell.column;
+                      const isRenderColumn = priority >= currentPriority;
                       return isRenderColumn ? (
-                        <td key={idGenerator()} {...cell.getCellProps()}>
+                        <StyledTd
+                          key={idGenerator()}
+                          className={cx('bodyTrTd', cell.column.props?.overflowwidth && 'OverflowData')}
+                          {...cell.getCellProps()}
+                          {...props}
+                        >
                           <Text>{cell.render('Cell')}</Text>
-                        </td>
+                        </StyledTd>
                       ) : null;
                     })}
                   </tr>

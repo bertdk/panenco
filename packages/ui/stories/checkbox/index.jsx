@@ -17,10 +17,10 @@ export default decorator('Checkbox', CheckboxDocs, Readme).add('Checkbox compone
     <WrappedComponent>
       <Row style={{ justifyContent: 'space-around' }}>
         <Col s="2" m="4" l="3">
-          <Checkbox label="Checkbox" checked={isChecked1} onClick={handleClick} />
+          <Checkbox label="Checkbox" checked={isChecked1} onChecked={handleClick} />
         </Col>
         <Col s="2" m="4" l="3">
-          <Checkbox label="Checkbox" checked={isChecked2} onClick={() => setChecked2(!isChecked2)} />
+          <Checkbox label="Checkbox" checked={isChecked2} onChecked={() => setChecked2(!isChecked2)} />
         </Col>
       </Row>
       <Row style={{ justifyContent: 'space-around' }}>
@@ -28,7 +28,7 @@ export default decorator('Checkbox', CheckboxDocs, Readme).add('Checkbox compone
           <Checkbox label="Checkbox" checked disabled />
         </Col>
         <Col s="2" m="4" l="3">
-          <Checkbox label="Label example" checked={isChecked3} onClick={() => setChecked3(!isChecked3)} />
+          <Checkbox label="Label example" checked={isChecked3} onChecked={() => setChecked3(!isChecked3)} />
         </Col>
       </Row>
     </WrappedComponent>

@@ -84,3 +84,15 @@ export const Styles = styled.div`
     }
   }
 `;
+
+export const StyledTd = styled.td`
+  &.OverflowData {
+    & span {
+      white-space: nowrap;
+      max-width: ${(props: any): string => `${props.overflowwidth}px`};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: bottom;
+    }
+  }
+`;

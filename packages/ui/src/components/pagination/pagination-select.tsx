@@ -8,7 +8,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   totalItems?: number;
   onPagination?: () => void;
   perPage?: number;
-  formatUrl?: any;
+  formatUrl?: (path?: any) => any;
   currentPage?: number;
   disabled?: boolean;
   contentBeforeSelect?: string;
