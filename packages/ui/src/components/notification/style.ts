@@ -66,6 +66,7 @@ export const StyledNotificationContainer = styled(ToastContainer)`
 
   .Toastify__close {
     &-button {
+      flex-shrink: 0;
       background: transparent;
       outline: none;
       border: none;
@@ -83,6 +84,9 @@ export const StyledNotificationContainer = styled(ToastContainer)`
       &--icon {
         width: 100%;
         height: 100%;
+      }
+      &:focus {
+        outline: 2px solid ${(props: any): string => props.theme.colors.outline}
       }
     }
   }

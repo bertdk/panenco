@@ -38,7 +38,7 @@ export const AccordionSecondary = React.forwardRef(
         mode={mode}
         className={cx(className, 'accordion')}
       >
-        <button type="button" className="accordionHeader" onClick={handleClick}>
+        <button type="button" className="accordionHeader" onClick={handleClick} aria-expanded={isOpen || 'false'}>
           {iconLeft && (
             <Icon
               className={cx('accordionHeaderIcon', isOpen ? 'accordionHeaderIconOpen' : 'accordionHeaderIconClosed')}
