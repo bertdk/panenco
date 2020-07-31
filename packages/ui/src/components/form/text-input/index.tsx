@@ -61,7 +61,7 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
                 {React.isValidElement(iconBefore) ? iconBefore : <Icon icon={iconBefore} />}
               </div>
             )}
-            <input type={type} className="input" placeholder={placeholder} disabled={disabled} {...inputProps} />
+            <input type={type} aria-label={`${title||""}${subTitle||""}`} className="input" placeholder={placeholder} disabled={disabled} {...inputProps} />
             {iconAfter && (
               <div className="iconAfter">{React.isValidElement(iconAfter) ? iconAfter : <Icon icon={iconAfter} />}</div>
             )}
