@@ -57,6 +57,13 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
     const theme = useTheme();
     const { mode } = useMode();
 
+    const createAriaLabel = () => {
+      let label = "";
+      if(title) label += title;
+      if(subTitle) label += subTitle;
+      return label;
+    }
+
     return (
       <StyledTextArea className={cx('textArea', className)} theme={theme} mode={mode} ref={ref} {...props}>
         {title && (
@@ -73,6 +80,7 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
         <div className="withErrorWrapper">
           <div className="withErrorWrapperContent">
             <textarea
+              aria-label={createAriaLabel()}
               className={cx('input', error && 'inputError', disabled && 'inputDisabled', className)}
               ref={useCombinedrefs}
               onChange={handleChange}

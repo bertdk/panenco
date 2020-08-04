@@ -42,6 +42,8 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     return (
       <StyledChip
         type="button"
+        role="switch" 
+        aria-checked={checked}
         disabled={disabled}
         onClick={onClick}
         checked={checked}

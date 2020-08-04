@@ -42,7 +42,7 @@ export const AccordionPrimary = React.forwardRef(
         className={cx(className, 'accordion')}
         {...otherProps}
       >
-        <button type="button" className="accordionHeader" onClick={handleClick}>
+        <button type="button" className="accordionHeader" onClick={handleClick} aria-expanded={isOpen || 'false'}>
           {iconLeft && (
             <Icon
               className={cx(

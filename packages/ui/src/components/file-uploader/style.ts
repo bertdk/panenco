@@ -19,78 +19,57 @@ export const StyledFileUploader = styled.div`
   .uploader {
     width: 100%;
     display: flex;
-    /* flex-direction: row-reverse; */
     justify-content: space-between;
     background-color: ${(props: any): string =>
       props.mode === ThemeMode.dark ? transparentize(0.4, props.theme.colors.secondary) : props.theme.colors.border};
     border-radius: 4px;
-    border: 2px solid
-      ${(props: any): string => {
-        if (props.error) {
-          return props.theme.colors.error;
-        }
-        return props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light;
-      }};
     position: relative;
     transition: 0.3s;
     align-items: center;
     height: 54px;
 
-    &:focus-within {
-      border: 2px solid ${(props: any): string => props.theme.colors.outline};
-      transition: 0.3s;
-      .uploaderBtn {
-        box-shadow: 0 0 0 2px transparent;
-      }
-    }
     &:hover {
       cursor: ${(props: any): string => (props.loading ? 'auto' : 'pointer')};
     }
 
     &Input {
-      display: none;
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
     }
 
     &Btn {
       width: 100px;
-      height: 100%;
-
+      height: calc(100% - 4px);
       box-shadow: 0 0 0 2px
-        ${(props: any): string => {
-          if (props.error) {
-            return props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500;
-          }
-          return 'transparent';
-        }};
+        ${(props: any): string => props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
       &:hover {
-
-      box-shadow: 0 0 0 2px
-        ${(props: any): string => {
-          if (props.error) {
-            return props.mode === ThemeMode.dark ? props.theme.colors.background50 : props.theme.colors.hover700;
-          }
-          return 'transparent';
-        }};
+        box-shadow: 0 0 0 2px
+          ${(props: any): string => props.mode === ThemeMode.dark ? props.theme.colors.background50 : props.theme.colors.hover700};
+      }
+      &:focus {
+        box-shadow: 0 0 0 2px ${(props: any): string => props.theme.colors.outline};
       }
     }
 
-    .placeholderBox {
+    .placeholderBox,
+    .placeholderBoxError {
       display: flex;
       justify-content: space-between;
       flex-grow: 1;
       overflow: hidden;
-      /* border: 2px solid
-        ${(props: any): string => {
-          if (props.error) {
-            return props.theme.colors.error;
-          }
-          return props.mode === ThemeMode.dark
-            ? transparentize(0.4, props.theme.colors.secondary)
-            : props.theme.colors.border;
-        }};
-      border-right-color: transparent; */
       height: 100%;
       align-items: center;
+      border: 2px solid transparent;
+      border-radius: 4px 0 0 4px;
+
+        &:focus-within {
+          border: 2px solid ${(props: any): string => props.theme.colors.outline};
+          border-right-color: transparent;
+        }
 
       &Title {
         color: ${(props: any): string => {
@@ -118,7 +97,17 @@ export const StyledFileUploader = styled.div`
           return props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.secondary;
         }};
         margin-right: 16px;
+        > div {
+            display: inherit;
+            align-items: center;
+            justify-content: center;
+        }
       }
+    }
+
+    .placeholderBoxError {
+      border: 2px solid ${(props: any): string => props.error && props.theme.colors.error};
+      border-right-color: transparent;
     }
   }
   .error {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cx from 'classnames';
-import { PrimaryButton, Text, Icon, Loader } from 'components';
+import { PrimaryButton, Text, Icon, Loader, ButtonIcon } from 'components';
 import { useTheme, useMode } from 'utils/hooks';
 import { ThemeMode, InputPropsType } from 'utils/types';
 import { idGenerator } from 'utils/helpers';
@@ -76,7 +76,7 @@ export const FileUploader = ({
   } else if (fileName) {
     renderPlaceholder = fileName;
     renderStatusIcons = (
-      <Icon icon={icon || Icon.icons.x} className={cx('placeholderBoxIcon', iconClassName)} onClick={handleIconClick} />
+      <ButtonIcon icon={icon || Icon.icons.x} type="reset" className={cx('placeholderBoxIcon', iconClassName)} onClick={handleIconClick}/>
     );
   } else if (error) {
     renderStatusIcons = <Icon icon={icon || Icon.icons.close} className={cx('placeholderBoxIcon', iconClassName)} />;
@@ -100,21 +100,21 @@ export const FileUploader = ({
         </Text>
       )}
       <label className="uploader" htmlFor={id || defaultId}>
-        <input
-          className="uploaderInput"
-          type="file"
-          id={id || defaultId}
-          disabled={disabled || loading}
-          onChange={updateFileName}
-          key={key}
-          {...inputProps}
-        />
-        <div className="placeholderBox">
+        <div className={error ? "placeholderBoxError" : "placeholderBox"}>
+          <input
+            className="uploaderInput"
+            type="file"
+            id={id || defaultId}
+            disabled={disabled || loading}
+            onChange={updateFileName}
+            key={key}
+            {...inputProps}
+          />
           <Text className="placeholderBoxTitle">{renderPlaceholder}</Text>
           {renderStatusIcons}
         </div>
 
-        <PrimaryButton className="uploaderBtn" disabled={loading}>
+        <PrimaryButton type="submit" className="uploaderBtn" disabled={disabled || loading}>
           {buttonText}
         </PrimaryButton>
       </label>

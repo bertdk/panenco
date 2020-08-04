@@ -6,9 +6,9 @@ export const StyledLabel = styled.label`
   display: flex;
   width: max-content;
 
-  /* &:focus-within {
+  &:focus-within {
     outline: 2px solid ${(props: any): string => props.theme.colors.outline};
-  } */
+  }
 
   &:hover {
     cursor: pointer;
