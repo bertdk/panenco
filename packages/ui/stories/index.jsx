@@ -25,6 +25,7 @@ import TableStory from './table';
 import TextStory from './text';
 import PaginationStory from './pagination';
 import WizardStory from './wizard';
+import BannersStory from './banners';
 
 storiesOf('Accordion', AccordionStory);
 storiesOf('AutoComplete', AutoCompleteStory);
@@ -48,3 +49,4 @@ storiesOf('FileUploader', FileUploaderStory);
 storiesOf('Notification', NotificationStory);
 storiesOf('Pagination', PaginationStory);
 storiesOf('Wizard', WizardStory);
+storiesOf('Banners', BannersStory);

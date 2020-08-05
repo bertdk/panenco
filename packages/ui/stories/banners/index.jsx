@@ -2,7 +2,7 @@ import React from 'react';
 
 // import PaginationReadme from 'components/pagination/README.md';
 
-import { Row, Col, CookiesBanner } from 'components';
+import { CookiesBanner } from 'components';
 
 import { BrowserRouter } from 'react-router-dom';
 

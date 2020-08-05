@@ -1,7 +1,6 @@
 import { styled } from 'linaria/react';
-import { ThemeMode } from 'utils/types';
-import { Paper } from 'components';
 import { transparentize } from 'polished';
+import { ThemeMode } from '../../../utils/types';
 
 export const StyledCookiesContainer = styled.div`
   align-items: center;
@@ -14,7 +13,7 @@ export const StyledCookiesContainer = styled.div`
   position: fixed;
   width: 100%;
 
-  ${Paper as any} {
+  .cookiesModalPaper {
     max-width: 50%;
     min-width: 300px;
   }
@@ -29,6 +28,12 @@ export const StyledCookiesContainer = styled.div`
     }
   }
 
+  .cookiesModalShortDescription {
+    &Text {
+      color: ${(props: any) => (props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary)};
+    }
+  }
+
   .cookiesModalDetailedViewButton {
     background: none;
     border: none;
@@ -36,18 +41,31 @@ export const StyledCookiesContainer = styled.div`
     margin: 0;
     margin-left: auto;
     padding: 0;
+
+    &Text {
+      color: ${(props: any) =>
+        props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
+    }
   }
 `;
 
 export const StyledCookieEntry = styled.div`
   margin-bottom: 24px;
 
-  &Title {
+  .cookieEntryTitle {
     margin-bottom: 8px;
+
+    &Text {
+      color: ${(props: any) => (props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary)};
+    }
   }
 
   .cookieEntryDescription {
     margin-bottom: 12px;
+
+    &Text {
+      color: ${(props: any) => (props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary)};
+    }
   }
 
   .cookieEntryRadio {

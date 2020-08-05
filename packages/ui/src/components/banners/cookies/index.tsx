@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { PrimaryButton, SecondaryButton, Text, Radio, Paper } from 'components';
-import { ThemeMode } from 'utils/types';
-import { useTheme, useMode } from 'utils/hooks';
+import cx from 'classnames';
+import { PrimaryButton, SecondaryButton, Text, Radio, Paper } from '../../index';
+import { useTheme, useMode } from '../../../utils/hooks';
 
 import { StyledCookiesContainer, StyledCookieEntry } from './styles';
 
@@ -47,7 +47,7 @@ const CookiesBanner = ({
   const toggleDetailsShow = React.useCallback(() => setShowDetailed(!showDetailed), [showDetailed]);
 
   const cookiesDefaults = React.useMemo(() => {
-    let cookiesAcceptedInitial = {};
+    const cookiesAcceptedInitial = {};
 
     cookiesList.forEach((entry) => {
       const { cookieId } = entry;
@@ -79,14 +79,20 @@ const CookiesBanner = ({
         {cookiesList.map((cookieEntry) => {
           const onCookieChange = handleCookieChange(cookieEntry.cookieId);
           return (
-            <StyledCookieEntry key={cookieEntry.cookieId}>
+            <StyledCookieEntry theme={theme} mode={mode} key={cookieEntry.cookieId}>
               <div className="cookieEntryTitle">
-                <Text weight={theme.typography.weights.black} size={theme.typography.sizes.s}>
+                <Text
+                  weight={theme.typography.weights.black}
+                  size={theme.typography.sizes.s}
+                  className="cookieEntryTitleText"
+                >
                   {cookieEntry.cookieTitle}
                 </Text>
               </div>
               <div className="cookieEntryDescription">
-                <Text size={theme.typography.sizes.s}>{cookieEntry.cookieDescription}</Text>
+                <Text size={theme.typography.sizes.s} className="cookieEntryDescriptionText">
+                  {cookieEntry.cookieDescription}
+                </Text>
               </div>
               <div className="cookieEntryRadio">
                 <Radio
@@ -114,10 +120,7 @@ const CookiesBanner = ({
         <div className="cookiesModalActions">
           <PrimaryButton onClick={handleSave}>{saveButtonText}</PrimaryButton>
           <button type="button" onClick={toggleDetailsShow} className="cookiesModalDetailedViewButton">
-            <Text
-              weight={theme.typography.weights.black}
-              color={mode === ThemeMode.dark ? theme.colors.light : theme.colors.primary}
-            >
+            <Text weight={theme.typography.weights.black} className="cookiesModalDetailedViewButtonText">
               {hideDetailsText}
             </Text>
           </button>
@@ -128,16 +131,15 @@ const CookiesBanner = ({
     modalContent = (
       <>
         <div className="cookiesModalShortDescription">
-          <Text size={theme.typography.sizes.s}>{shortContent}</Text>
+          <Text size={theme.typography.sizes.s} className="cookiesModalShortDescriptionText">
+            {shortContent}
+          </Text>
         </div>
         <div className="cookiesModalActions">
           <PrimaryButton onClick={handleSave}>{okButtonText}</PrimaryButton>
-          <SecondaryButton>{cancelButtonText}</SecondaryButton>
+          {onCancel && <SecondaryButton onClick={onCancel}>{cancelButtonText}</SecondaryButton>}
           <button type="button" onClick={toggleDetailsShow} className="cookiesModalDetailedViewButton">
-            <Text
-              weight={theme.typography.weights.black}
-              color={mode === ThemeMode.dark ? theme.colors.light : theme.colors.primary}
-            >
+            <Text weight={theme.typography.weights.black} className="cookiesModalDetailedViewButtonText">
               {showDetailsText}
             </Text>
           </button>
@@ -147,8 +149,8 @@ const CookiesBanner = ({
   }
 
   return ReactDOM.createPortal(
-    <StyledCookiesContainer>
-      <Paper className={className}>{modalContent}</Paper>
+    <StyledCookiesContainer theme={theme} mode={mode}>
+      <Paper className={cx('cookiesModalPaper', className)}>{modalContent}</Paper>
     </StyledCookiesContainer>,
     portalContainer,
   );
