@@ -23,7 +23,7 @@ export type CookiesBannerProps = {
   hideDetailsText: string;
   cookiesList: CookieEntry[];
   onSave: (any) => Promise<any> | void;
-  onCancel: (any) => Promise<any> | void;
+  onCancel?: (any) => Promise<any> | void;
   portalContainer: Element;
 };
 
