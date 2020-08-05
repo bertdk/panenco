@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme, useMode } from 'utils/hooks';
+import { useTheme, useMode } from '../../utils/hooks';
 import { StyledPaper } from './styles';
 
 export const Paper = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
