@@ -1,0 +1,32 @@
+.installModal {
+  background: white;
+  border: 1px solid #90a4ae;
+  border-radius: 4px;
+  padding: 24px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &Icon {
+    background: #90a4ae;
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 16px;
+  }
+
+  &Actions {
+    align-items: flex-end;
+    display: flex;
+    margin-top: 24px;
+  }
+}

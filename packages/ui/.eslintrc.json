@@ -42,9 +42,7 @@
   },
   "settings": {
     "import/resolver": {
-      "ts": {
-        "directory": ["./src", "./stories"]
-      }
+      "typescript": {}
     }
   }
 }
