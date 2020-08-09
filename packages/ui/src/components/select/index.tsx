@@ -135,6 +135,7 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
             components={{ Option: CustomOption, ...propComponents }}
             noOptionsMessage={noOptionsMessage}
             isOptionDisabled={isOptionDisabled}
+            error={error}
             {...props}
           />
           {error && (
