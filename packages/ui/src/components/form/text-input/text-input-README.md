@@ -27,6 +27,7 @@ This component inherits the attributes of the **div** element and extends the fu
 - type - type of input field;
 - iconBefore - it could be icon from Icon copmponent or some JSX.Eleement;
 - iconAfter - the same as with iconBefore;
+- wrapperProps - it's props which will be added to wrapper component;
 - inputProps - it's props which will be added to input component;
 - ref - ref
 
@@ -36,8 +37,9 @@ This component inherits the attributes of the **div** element and extends the fu
 | subTitle   | string                                  | -            | -          |
 | error      | string                                  | -            | -          |
 | disabled   | boolean                                 | -            | -          |
-| type       | 'text' or 'password' or 'email'         | text         | -          |
+| type       | string                                  | text         | -          |
 | iconBefore | HTMLObjectElement or JSX.Element        | -            | -          |
 | iconAfter  | HTMLObjectElement or JSX.Element        | -            | -          |
 | inputProps | React.HTMLAttributes (HTMLInputElement) | -            | -          |
+| inputProps | React.HTMLAttributes (HTMLDivElement)   | -            | -          |
 | ref        | React.RefObject                         | -            | -          |

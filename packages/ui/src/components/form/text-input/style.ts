@@ -24,6 +24,12 @@ export const StyledTextInput = styled.div`
   .fieldWrapper {
     display: flex;
     align-items: center;
+    width: ${(props: any): string => {
+      if (props.error) {
+        return '100%';
+      }
+      return 'calc(100% - 24px)';
+    }};
 
     .inputField {
       width: 100%;

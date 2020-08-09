@@ -2,15 +2,14 @@ import * as React from 'react';
 import cx from 'classnames';
 import { Icon, Text } from 'components';
 import { useTheme, useMode } from 'utils/hooks';
-import { InputComponent, InputPropsType } from 'utils/types';
+import { InputComponent, WrapperProps, InputPropsType } from 'utils/types';
 import { StyledTextInput } from './style';
 
-export interface TextInputProps extends InputComponent, React.HTMLAttributes<HTMLDivElement> {
-  type?: 'text' | 'password' | 'email';
+export interface TextInputProps extends InputComponent, React.InputHTMLAttributes<HTMLInputElement> {
   iconBefore?: HTMLObjectElement | JSX.Element;
   iconAfter?: HTMLObjectElement | JSX.Element;
-  disabled?: boolean;
-  inputProps?: InputPropsType;
+  wrapperProps?: WrapperProps;
+  inputProps?: InputPropsType; // will be removed in next versions
 }
 
 export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
@@ -24,8 +23,8 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
       iconAfter,
       disabled,
       error,
+      wrapperProps,
       inputProps,
-      style,
       placeholder = 'Placeholder',
       ...props
     }: TextInputProps,
@@ -36,12 +35,12 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
 
     return (
       <StyledTextInput
-        className={cx(className, 'textInput')}
+        className={cx('textInput', wrapperProps?.className)}
+        error={error}
         theme={theme}
-        style={style}
         mode={mode}
         ref={ref}
-        {...props}
+        {...wrapperProps}
       >
         {title && (
           <Text weight={theme.typography.weights.bold} size={theme.typography.sizes.s} className="inputTitle">
@@ -61,7 +60,15 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
                 {React.isValidElement(iconBefore) ? iconBefore : <Icon icon={iconBefore} />}
               </div>
             )}
-            <input type={type} aria-label={`${title||""}${subTitle||""}`} className="input" placeholder={placeholder} disabled={disabled} {...inputProps} />
+            <input
+              type={type}
+              aria-label={`${title || ''}${subTitle || ''}`}
+              className="input"
+              placeholder={placeholder}
+              disabled={disabled}
+              {...inputProps}
+              {...props}
+            />
             {iconAfter && (
               <div className="iconAfter">{React.isValidElement(iconAfter) ? iconAfter : <Icon icon={iconAfter} />}</div>
             )}
