@@ -6,39 +6,36 @@ import { InputPropsType } from 'utils/types';
 import { idGenerator } from 'utils/helpers';
 import { StyledRadio } from './style';
 
-export interface RadioButtonProps extends React.HTMLAttributes<HTMLLabelElement> {
-  // [key: string]: any;
+interface WrapperProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  [key: string]: any;
+  ref?: React.Ref<HTMLLabelElement>;
+}
+
+export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name?: string;
-  value?: string;
-  disabled?: boolean;
-  checked?: boolean;
   error?: string;
-  inputProps?: InputPropsType;
+  inputProps?: InputPropsType; // will be removed in next version
+  wrapperProps?: WrapperProps;
 }
 
 export const Radio = React.forwardRef<HTMLLabelElement, RadioButtonProps>(
-  (
-    { label, value, name, id, className, checked, inputProps, disabled, style, error, ...props }: RadioButtonProps,
-    ref,
-  ): JSX.Element => {
+  ({ label, id, className, checked, inputProps, wrapperProps, disabled, error, ...props }, ref): JSX.Element => {
     const theme = useTheme();
     const { mode } = useMode();
     const uniqueID = idGenerator();
     const defaultId = id || uniqueID;
 
     return (
-      <StyledRadio theme={theme} mode={mode} ref={ref} style={style} error={error} {...props}>
+      <StyledRadio theme={theme} mode={mode} ref={ref} error={error} {...wrapperProps}>
         <label className={cx('label', disabled && 'labelDisabled', className)} htmlFor={id || defaultId}>
           <input
             type="radio"
             checked={checked}
-            className="radiobox"
-            name={name}
-            value={value}
+            className={cx('radiobox', className)}
             id={id || defaultId}
             disabled={disabled}
             {...inputProps}
+            {...props}
           />
           <div className="container">
             <div className="point" />
