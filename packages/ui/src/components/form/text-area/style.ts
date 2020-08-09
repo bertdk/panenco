@@ -1,12 +1,13 @@
 import { styled } from 'linaria/react';
 import { ThemeMode } from 'utils/types';
 import { transparentize } from 'polished';
+import { breakpoints } from 'styles';
 
 export const StyledTextArea = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${(props: any): string =>
-    props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light}};
+    props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light};
 
   .title {
     color: ${(props: any): string =>
@@ -30,12 +31,12 @@ export const StyledTextArea = styled.div`
     }};
 
     &Icon {
-      margin: 10px 0 0 8px;
+      margin: 8px 0 0 8px;
       height: 16px;
       min-width: 16px;
       color: ${(props: any): string => props.theme.colors.error};
     }
-    
+
     &Content {
       width: 100%;
     }
@@ -46,13 +47,13 @@ export const StyledTextArea = styled.div`
       min-height: 86px;
       padding: 6px 12px;
       color: ${(props: any): string =>
-        props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};;
+        props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
       border: 1px solid ${(props: any): string => props.theme.colors.secondary};
       border-radius: 4px;
       font-size: ${(props: any): string => props.theme.typography.sizes.s.textSize};
       background-color: ${(props: any): string =>
         props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light};
-        
+
       &::placeholder {
         color: ${(props: any): string => props.theme.colors.secondary};
       }
@@ -62,7 +63,7 @@ export const StyledTextArea = styled.div`
         border-color: transparent;
         color: ${(props: any): string =>
           props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
-        
+
         &:hover {
           box-shadow: none;
         }
@@ -78,8 +79,9 @@ export const StyledTextArea = styled.div`
       }
 
       &:hover {
-        border: 1px solid ${(props: any): string =>
-          props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
+        border: 1px solid
+          ${(props: any): string =>
+            props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
         color: ${(props: any): string =>
           props.mode === ThemeMode.dark ? props.theme.colors.secondary : props.theme.colors.primary};
       }
@@ -89,8 +91,7 @@ export const StyledTextArea = styled.div`
         border-color: transparent;
         box-shadow: 0 0 0 2px ${(props: any): string => props.theme.colors.outline};
       }
-    };
-
+    }
 
     .counterWrapper {
       margin-top: 4px;
@@ -109,6 +110,15 @@ export const StyledTextArea = styled.div`
 
       .hidden {
         visibility: hidden;
+      }
+    }
+  }
+
+  @media (max-width: ${breakpoints.l}) {
+    .withErrorWrapper {
+      width: 100%;
+      &Icon {
+        display: none;
       }
     }
   }

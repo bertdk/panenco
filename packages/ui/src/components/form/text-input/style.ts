@@ -8,7 +8,7 @@ export const StyledTextInput = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   background-color: ${(props: any): string =>
-    props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light}};
+    props.mode === ThemeMode.dark ? props.theme.colors.dark : props.theme.colors.light};
 
   .inputTitle {
     color: ${(props: any): string =>
@@ -67,15 +67,15 @@ export const StyledTextInput = styled.div`
         }
       }
 
-        &Error {
-          box-shadow: 0 0 0 2px ${(props: any): string => props.theme.colors.error};
-          border-color: transparent;
-          color: ${(props: any): string =>
-            props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
-          &:hover {
-            box-shadow: none;
-          }
+      &Error {
+        box-shadow: 0 0 0 2px ${(props: any): string => props.theme.colors.error};
+        border-color: transparent;
+        color: ${(props: any): string =>
+          props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
+        &:hover {
+          box-shadow: none;
         }
+      }
 
       &Disabled {
         pointer-events: none;
@@ -87,9 +87,9 @@ export const StyledTextInput = styled.div`
       }
 
       &:hover {
-        border: 1px solid ${(props: any): string =>
-          props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
-
+        border: 1px solid
+          ${(props: any): string =>
+            props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.accent500};
       }
 
       &:focus-within {
@@ -107,22 +107,25 @@ export const StyledTextInput = styled.div`
   }
 
   .errorIconWrapper {
-      align-items: center;
-      display: flex;
-      min-width: 24px;
-      padding-left: 8px;
-      flex-shrink: 0;
-    }
+    align-items: center;
+    display: flex;
+    min-width: 24px;
+    padding-left: 8px;
+    flex-shrink: 0;
+  }
 
-    .errorIcon {
-      color: ${(props: any): string => props.theme.colors.error};
-      height: 16px;
-      width: 16px;
-    }
+  .errorIcon {
+    color: ${(props: any): string => props.theme.colors.error};
+    height: 16px;
+    width: 16px;
+  }
 
   @media (max-width: ${breakpoints.l}) {
     .errorIconWrapper {
       display: none;
+    }
+    .fieldWrapper {
+      width: 100%;
     }
   }
 `;

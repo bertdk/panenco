@@ -257,6 +257,7 @@ export const StyledSelectWrapper = styled.div`
   }
 
   @media (max-width: ${breakpoints.l}) {
+    width: 100%;
     & .errorIconWrapper {
       display: none;
     }
