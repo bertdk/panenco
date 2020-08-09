@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-import { Radio } from '@panenco/pui';
+import { Radio } from '@panenco/ui';
 
 return (
   <>

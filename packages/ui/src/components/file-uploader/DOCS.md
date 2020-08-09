@@ -3,7 +3,7 @@
 FileUploader component.
 
 ```js
-import { FileUploader, FileUploaderProps } from '@panenco/pui';
+import { FileUploader, FileUploaderProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

@@ -3,7 +3,7 @@
 Accordion component.
 
 ```js
-import { AccordionPrimary, AccordionSecondary, AccordionGroup, AccordinProps } from '@panenco/pui';
+import { AccordionPrimary, AccordionSecondary, AccordionGroup, AccordinProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

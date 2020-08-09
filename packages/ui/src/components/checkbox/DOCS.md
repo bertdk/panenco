@@ -3,7 +3,7 @@
 Checkbox component.
 
 ```js
-import { Checkbox, CheckboxProps } from '@panenco/pui';
+import { Checkbox, CheckboxProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { FileUploader } from '@panenco/pui';
+import { FileUploader } from '@panenco/ui';
 
 const render  = () => {
   return (

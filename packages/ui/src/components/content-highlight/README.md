@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { ContentHighlight } from '@panenco/pui';
+import { ContentHighlight } from '@panenco/ui';
 
 const render  = () => {
   return (

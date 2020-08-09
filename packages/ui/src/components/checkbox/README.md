@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Checkbox } from '@panenco/pui';
+import { Checkbox } from '@panenco/ui';
 
 const render  = () => {
   const [isChecked, setChecked] = React.useState(false);

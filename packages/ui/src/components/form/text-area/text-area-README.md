@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { TextArea } from '@panenco/pui';
+import { TextArea } from '@panenco/ui';
 
 const render  = () => {
   return (

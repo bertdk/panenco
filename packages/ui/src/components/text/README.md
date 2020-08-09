@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import { Text, useTheme } from '@panenco/pui';
+import { Text, useTheme } from '@panenco/ui';
 
 render() {
   const theme = useTheme();

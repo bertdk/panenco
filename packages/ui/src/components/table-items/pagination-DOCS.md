@@ -3,7 +3,7 @@
 Pagination component
 
 ```js
-import { PaginationSelect } from '@panenco/pui';
+import { PaginationSelect } from '@panenco/ui';
 ```
 
 <!-- STORY -->

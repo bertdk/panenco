@@ -1,7 +1,7 @@
 # Notification
 
 ```js
-import { toast, NotificationContainer, NotificationContainerProps } from '@panenco/pui';
+import { toast, NotificationContainer, NotificationContainerProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

@@ -3,7 +3,7 @@
 Radio component.
 
 ```js
-import { Radio, RadioButtonProps } from '@panenco/pui';
+import { Radio, RadioButtonProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

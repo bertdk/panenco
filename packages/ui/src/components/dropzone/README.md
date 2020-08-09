@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Dropzone } from '@panenco/pui';
+import { Dropzone } from '@panenco/ui';
 
 const render = () => {
   return (

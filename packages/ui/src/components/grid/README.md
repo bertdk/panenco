@@ -7,7 +7,7 @@ Margins and gutters is fixed and changes according to breakpoints (check design 
 
 ```js
 ...
-import { Row, Col, GridContainer } from '@panenco/pui';
+import { Row, Col, GridContainer } from '@panenco/ui';
 
 const render  = () => {
   return (

@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Stamp } from '@panenco/pui';
+import { Stamp } from '@panenco/ui';
 import { colors } from 'styles/colors';
 
 const render = () => {

@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { SelectInput } from '@panenco/pui';
+import { SelectInput } from '@panenco/ui';
 
 const options = [
   { label: 'Chip', value: '1' },

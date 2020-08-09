@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Slider } from '@panenco/pui';
+import { Slider } from '@panenco/ui';
 
 const render = () => {
   return (

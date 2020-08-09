@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { TextInput } from '@panenco/pui';
+import { TextInput } from '@panenco/ui';
 
 const render  = () => {
   return (

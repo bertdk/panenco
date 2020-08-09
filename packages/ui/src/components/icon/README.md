@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Icon } from '@panenco/pui';
+import { Icon } from '@panenco/ui';
 
 const render = () => {
   return (

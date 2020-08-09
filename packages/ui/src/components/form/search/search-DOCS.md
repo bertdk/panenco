@@ -3,7 +3,7 @@
 Search component
 
 ```js
-import { Search } from '@panenco/pui';
+import { Search } from '@panenco/ui';
 ```
 
 <!-- STORY -->

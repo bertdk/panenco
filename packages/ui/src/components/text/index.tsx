@@ -29,22 +29,10 @@ const StyledSpan = styled.span`
 `;
 
 export const Text: React.FC<TextProps> = React.forwardRef<HTMLSpanElement, TextProps>(
-  (
-    { color = colors.primary, size = sizes.s, weight = 'inherit', className, children, style, ...props }: TextProps,
-    ref,
-  ): JSX.Element => {
+  ({ color = colors.primary, size = sizes.s, weight = 'inherit', children, ...props }: TextProps, ref): JSX.Element => {
     const theme = useTheme();
     return (
-      <StyledSpan
-        theme={theme}
-        className={className}
-        color={color}
-        size={size}
-        weight={weight}
-        style={style}
-        ref={ref}
-        {...props}
-      >
+      <StyledSpan theme={theme} color={color} size={size} weight={weight} ref={ref} {...props}>
         {children}
       </StyledSpan>
     );

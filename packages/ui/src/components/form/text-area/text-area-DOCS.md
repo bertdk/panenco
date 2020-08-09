@@ -3,7 +3,7 @@
 TextArea component
 
 ```js
-import { TextArea, TextAreaProps } from '@panenco/pui';
+import { TextArea, TextAreaProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

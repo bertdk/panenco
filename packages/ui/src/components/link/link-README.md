@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Link } from '@panenco/pui';
+import { Link } from '@panenco/ui';
 
 const render = () => {
   return (

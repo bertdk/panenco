@@ -3,7 +3,7 @@
 ContentHighlight component.
 
 ```js
-import { ContentHighlight } from '@panenco/pui';
+import { ContentHighlight } from '@panenco/ui';
 ```
 
 <!-- STORY -->
