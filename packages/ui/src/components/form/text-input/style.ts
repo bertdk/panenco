@@ -14,11 +14,13 @@ export const StyledTextInput = styled.div`
     color: ${(props: any): string =>
       props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
     margin-bottom: 4px;
+    margin-right: 24px;
   }
 
   .inputSubtitle {
     color: ${(props: any): string => props.theme.colors.secondary};
     margin-bottom: 4px;
+    margin-right: 24px;
   }
 
   .fieldWrapper {
@@ -126,6 +128,10 @@ export const StyledTextInput = styled.div`
     }
     .fieldWrapper {
       width: 100%;
+    }
+    .inputTitle,
+    .inputSubtitle {
+      margin-right: 0;
     }
   }
 `;

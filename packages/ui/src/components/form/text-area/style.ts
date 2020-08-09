@@ -13,11 +13,13 @@ export const StyledTextArea = styled.div`
     color: ${(props: any): string =>
       props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};
     margin-bottom: 4px;
+    margin-right: 24px;
   }
 
   .subtitle {
     color: ${(props: any): string => props.theme.colors.secondary};
     margin-bottom: 4px;
+    margin-right: 24px;
   }
 
   .withErrorWrapper {
@@ -120,6 +122,10 @@ export const StyledTextArea = styled.div`
       &Icon {
         display: none;
       }
+    }
+    .title,
+    .subtitle {
+      margin-right: 0;
     }
   }
 `;
