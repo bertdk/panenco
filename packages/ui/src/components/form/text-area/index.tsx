@@ -2,18 +2,17 @@ import * as React from 'react';
 import cx from 'classnames';
 import { Icon, Text } from 'components';
 import { useTheme, useMode } from 'utils/hooks';
-import { InputComponent } from 'utils/types';
+import { InputComponent, WrapperProps } from 'utils/types';
 import { useCombinedRefs } from 'utils/hooks/combinedrefs';
 import { StyledTextArea } from './style';
 
-interface TypeTetxtAreaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
+interface InputPropsType extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   ref?: React.Ref<HTMLTextAreaElement>;
 }
-export interface TextAreaProps extends InputComponent, React.HTMLAttributes<HTMLDivElement> {
-  maxLength?: number;
-  disabled?: boolean;
-  onChange?: (event?: React.FormEvent) => void;
-  inputProps?: TypeTetxtAreaProps;
+
+export interface TextAreaProps extends InputComponent, React.InputHTMLAttributes<HTMLTextAreaElement> {
+  wrapperProps?: WrapperProps;
+  inputProps?: InputPropsType; // will be removed in next versions
 }
 
 export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
@@ -26,10 +25,11 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
       disabled,
       error,
       onChange,
+      wrapperProps,
       inputProps,
       placeholder = 'Placeholder',
       ...props
-    }: TextAreaProps,
+    },
     ref,
   ): JSX.Element => {
     const [counter, setCounter] = React.useState(0);
@@ -58,14 +58,21 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
     const { mode } = useMode();
 
     const createAriaLabel = () => {
-      let label = "";
-      if(title) label += title;
-      if(subTitle) label += subTitle;
+      let label = '';
+      if (title) label += title;
+      if (subTitle) label += subTitle;
       return label;
-    }
+    };
 
     return (
-      <StyledTextArea className={cx('textArea', className)} theme={theme} mode={mode} ref={ref} {...props}>
+      <StyledTextArea
+        className={cx('textArea', wrapperProps?.className)}
+        error={error}
+        theme={theme}
+        mode={mode}
+        ref={ref}
+        {...wrapperProps}
+      >
         {title && (
           <Text weight={theme.typography.weights.bold} size={theme.typography.sizes.s} className="title">
             {title}
@@ -88,6 +95,7 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
               placeholder={placeholder}
               disabled={disabled}
               {...inputProps}
+              {...props}
             />
 
             <div className="counterWrapper">

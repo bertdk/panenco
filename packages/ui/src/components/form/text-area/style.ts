@@ -22,6 +22,12 @@ export const StyledTextArea = styled.div`
   .withErrorWrapper {
     display: flex;
     align-items: flex-start;
+    width: ${(props: any): string => {
+      if (props.error) {
+        return '100%';
+      }
+      return 'calc(100% - 24px)';
+    }};
 
     &Icon {
       margin: 10px 0 0 8px;
