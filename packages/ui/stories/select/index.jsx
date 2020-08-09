@@ -49,13 +49,18 @@ export default decorator('Select', SelectInputDocs, README).add('Select componen
         </Col>
       </Row>
       <Row style={{ justifyContent: 'space-around', alignItems: 'flex-start' }}>
-        <Col s="2" m="3" l="4">
+        <Col s="2" m="4" l="4">
           <SelectInput title="Select with Error" error="Error options" />
         </Col>
-        <Col s="2" m="3" l="4">
+        <Col s="2" m="4" l="4">
           <SelectInput placeholder="Disabled" isDisabled />
         </Col>
       </Row>
+      {/* <Row>
+        <Col s="2" m="4" l="4">
+          <TextInput error="1" />
+        </Col>
+      </Row> */}
     </WrappedComponent>
   );
 });

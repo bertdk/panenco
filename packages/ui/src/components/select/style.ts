@@ -28,10 +28,14 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
       return mode === ThemeMode.dark ? theme.colors.dark : theme.colors.light;
     })()}`,
     pointerEvents: state.isDisabled ? 'none' : 'auto',
-    width: `${((): string => {
-      if (error) return '100%';
-      return `calc(100% - 24px)`;
-    })()}`,
+    width: '100%',
+    // width: `${((): string => {
+    //   if (error) return '100%';
+    //   return `calc(100% - 24px)`;
+    // })()}`,
+    // [`@media (max-width: ${breakpoints.l})`]: {
+    //   width: '100%',
+    // },
     ...additionalStyles('container', styles, provided, state),
   }),
   control: (provided, state): any => {
@@ -204,8 +208,12 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
 });
 
 export const StyledSelectWrapper = styled.div`
-  width: 100%;
-
+  width: ${(props: any): string => {
+    if (props.error) {
+      return '100%';
+    }
+    return 'calc(100% - 24px)';
+  }};
   .isMultiActiveChips {
     display: flex;
     flex-wrap: wrap;
@@ -257,8 +265,10 @@ export const StyledSelectWrapper = styled.div`
   }
 
   @media (max-width: ${breakpoints.l}) {
+    width: 100%;
     .errorIconWrapper {
       display: none;
+      /* opacity: 0; */
     }
     .title,
     .subTitle {
