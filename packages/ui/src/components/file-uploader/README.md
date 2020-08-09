@@ -18,12 +18,11 @@ const render  = () => {
 
 ### Properties
 
-This component inherits the attributes of the **div** element and extends the functionality with next properties.
+This component inherits the attributes of the **input** element and extends the functionality with next properties.
 
 - id - component id (generate unique id by default);
 - title - component title;
 - placeholder - component placeholder;
-- disabled - set disabled state;
 - buttonText - content in button;
 - loading - set state when downloading a file;
 - iconClassName - override icon styles;
@@ -32,20 +31,20 @@ This component inherits the attributes of the **div** element and extends the fu
 - icon - icon which will be rendered;
 - loader - you can set you own loader if you want;
 - inputProps - it's props which will be added to input component;
-- ref - ref;
+- ref - wrapper ref;
 
-| propName      | propType                                | defaultValue      | isRequired |
-| ------------- | --------------------------------------- | ----------------- | ---------- |
-| disabled      | boolean                                 | -                 | -          |
-| loading       | boolean                                 | -                 | -          |
-| title         | string                                  | -                 | -          |
-| id            | string or (any)                         | generate uniqueID | -          |
-| placeholder   | string                                  | Upload file here  | -          |
-| buttonText    | string                                  | Upload            | -          |
-| loadingText   | string                                  | Uploading...      | -          |
-| error         | string                                  | -                 | -          |
-| iconClassName | string                                  | -                 | -          |
-| icon          | HTMLObjectElement                       | -                 | -          |
-| loader        | JSX.Element                             | -                 | -          |
-| ref           | React.RefObject                         | -                 | -          |
-| inputProps    | React.HTMLAttributes (HTMLInputElement) | -                 | -          |
+| propName      | propType                              | defaultValue      | isRequired |
+| ------------- | ------------------------------------- | ----------------- | ---------- |
+| loading       | boolean                               | -                 | -          |
+| title         | string                                | -                 | -          |
+| id            | string or (any)                       | generate uniqueID | -          |
+| placeholder   | string                                | Upload file here  | -          |
+| buttonText    | string                                | Upload            | -          |
+| loadingText   | string                                | Uploading...      | -          |
+| error         | string                                | -                 | -          |
+| iconClassName | string                                | -                 | -          |
+| icon          | HTMLObjectElement                     | -                 | -          |
+| loader        | JSX.Element                           | -                 | -          |
+| ref           | React.RefObject                       | -                 | -          |
+| inputProps    | React.InputHTMLAttributes             | -                 | -          |
+| wrapperProps  | React.HTMLAttributes (HTMLDivElement) | -                 | -          |
