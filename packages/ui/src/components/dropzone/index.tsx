@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { useDropzone } from 'react-dropzone';
 import { useTheme, useMode } from 'utils/hooks';
 import { Text, Icon, Loader } from 'components';
-import { ThemeMode, InputPropsType } from 'utils/types';
+import { ThemeMode, WrapperProps, InputPropsType } from 'utils/types';
 import { StyledDropzone } from './style';
 
 export interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,7 +15,8 @@ export interface DropzoneProps extends React.HTMLAttributes<HTMLDivElement> {
   error?: string;
   icon?: HTMLObjectElement;
   loader?: JSX.Element;
-  inputProps?: InputPropsType;
+  wrapperProps?: WrapperProps;
+  inputProps?: InputPropsType; // will be removed in next versions
 }
 
 export const Dropzone = React.forwardRef<HTMLDivElement, DropzoneProps>(
@@ -31,6 +32,7 @@ export const Dropzone = React.forwardRef<HTMLDivElement, DropzoneProps>(
       className,
       iconClassName,
       icon,
+      wrapperProps,
       inputProps,
       error,
       loader,
@@ -64,11 +66,9 @@ export const Dropzone = React.forwardRef<HTMLDivElement, DropzoneProps>(
         mode={mode}
         loading={loading}
         isDragActive={isDragActive}
-        style={style}
-        className={className}
         error={error}
         {...getRootProps()}
-        {...props}
+        {...wrapperProps}
       >
         {loading ? (
           <>
@@ -77,7 +77,7 @@ export const Dropzone = React.forwardRef<HTMLDivElement, DropzoneProps>(
           </>
         ) : (
           <>
-            <input {...getInputProps()} {...inputProps} />
+            <input {...getInputProps()} {...inputProps} {...props} />
             <Icon icon={iconImage} className={cx('icon', iconClassName)} />
             <Text className="content">{textContentInBlock}</Text>
           </>

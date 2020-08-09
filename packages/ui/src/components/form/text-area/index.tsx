@@ -7,6 +7,7 @@ import { useCombinedRefs } from 'utils/hooks/combinedrefs';
 import { StyledTextArea } from './style';
 
 interface InputPropsType extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+  [key: string]: any;
   ref?: React.Ref<HTMLTextAreaElement>;
 }
 

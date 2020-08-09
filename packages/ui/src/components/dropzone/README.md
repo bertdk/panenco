@@ -35,7 +35,8 @@ Component extends the functionality with next properties.
 - error - set state if has error;
 - icon - icon which will be rendered;
 - loader - you can set you own loader if you want;
-- inputProps - it's props which will be added to input component;
+  inputProps - it's props which will be added to input component;
+- wrapperProps - it's props which will be added to wrapper component;
 - ref - ref;
 
 | propName          | propType                                | defaultValue                              | isRequired |
@@ -49,4 +50,5 @@ Component extends the functionality with next properties.
 | icon              | HTMLObjectElement                       | -                                         | -          |
 | loader            | JSX.Element                             | -                                         | -          |
 | ref               | React.RefObject                         | -                                         | -          |
+| wrapperProps      | React.HTMLAttributes (HTMLDivElement)   | -                                         | -          |
 | inputProps        | React.HTMLAttributes (HTMLInputElement) | -                                         | -          |
