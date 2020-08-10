@@ -9,6 +9,7 @@ export const StyledWizard = styled.div`
   .wizzardStep {
     display: flex;
     flex-grow: 1;
+    position: relative;
 
     &Box {
       display: flex;
@@ -38,6 +39,11 @@ export const StyledWizard = styled.div`
           color: ${(props: any): string => props.theme.colors.light};
           background-color: ${(props: any): string => props.theme.colors.secondary};
         }
+      }
+      &Two {
+        position: absolute;
+        top: 20px;
+        width: max-content;
       }
 
       &CurrTitle {
