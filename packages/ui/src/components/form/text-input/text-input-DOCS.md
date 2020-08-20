@@ -3,7 +3,7 @@
 TextInput components
 
 ```js
-import { TextInput, TextInputProps } from '@panenco/pui';
+import { TextInput, TextInputProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

@@ -3,7 +3,7 @@
 Select Input component.
 
 ```js
-import { SelectInput, SelectInputProps } from '@panenco/pui';
+import { SelectInput, SelectInputProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

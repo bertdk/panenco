@@ -3,5 +3,5 @@
 ### Usage
 
 ```js
-import { Avatar } from '@panenco/pui';
+import { Avatar } from '@panenco/ui';
 ```

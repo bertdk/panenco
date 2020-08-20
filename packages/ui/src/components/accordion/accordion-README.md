@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { AccordionPrimary, AccordionSecondary, AccordionGroup } from '@panenco/pui';
+import { AccordionPrimary, AccordionSecondary, AccordionGroup } from '@panenco/ui';
 const render = () => {
   return (
       <AccordionPrimary title="Some title" isOpen>

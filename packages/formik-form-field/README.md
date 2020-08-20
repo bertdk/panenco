@@ -16,7 +16,7 @@ You supposed to use `FormField` instead of `Field` imported from `Formik` as sho
 ```javascript
 import * as React from 'react';
 import { Form } from 'formik';
-import { TextInput } from '@panenco/pui';
+import { TextInput } from '@panenco/ui';
 import Field from '@panenco/formik-form-field';
 
 const countries = [
@@ -33,16 +33,16 @@ const FormComponent = () => {
         name="birthDate"
         component={DayPicker}
         labelText="Date of birth"
-        onChangeAdapter={v => v}
-        valueAdapter={v => v}
+        onChangeAdapter={(v) => v}
+        valueAdapter={(v) => v}
       />
       <Field
         name="country"
         component={ReactSelect}
         options={countries}
         label="Country of origin"
-        onChangeAdapter={v => v.value}
-        valueAdapter={value => countries.find(country => value === country.value)}
+        onChangeAdapter={(v) => v.value}
+        valueAdapter={(value) => countries.find((country) => value === country.value)}
       />
       <PrimaryButton type="submit">Submit</PrimaryButton>
     </Form>

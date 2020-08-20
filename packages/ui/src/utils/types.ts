@@ -82,9 +82,14 @@ export interface InputComponent {
   subTitle?: string;
   error?: string;
 }
-export interface InputPropsType extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputPropsType extends React.InputHTMLAttributes<HTMLInputElement> {
   [key: string]: any;
   ref?: React.Ref<HTMLInputElement>;
+}
+
+export interface WrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+  [key: string]: any;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 export interface AccordinProps extends React.HTMLAttributes<HTMLDivElement> {

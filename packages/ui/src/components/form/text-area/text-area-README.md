@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { TextArea } from '@panenco/pui';
+import { TextArea } from '@panenco/ui';
 
 const render  = () => {
   return (
@@ -18,26 +18,20 @@ const render  = () => {
 
 ### Properties
 
-This component inherits the attributes of the **div** element and extends the functionality with next properties.
+This component inherits the attributes of the **text-area** element and extends the functionality with next properties.
 
 - title - title;
 - subTitle - subTitle;
 - error - add this prop when smth went wrong;
-- minHeight - min height for text area field (px);
-- maxLength - max number of symbols for text area;
-- disabled - set disabled state for input;
-- onChange - event for input;
+- wrapperProps - it's props which will be added to wrapper component;
 - inputProps - it's props which will be added to input component;
-- ref - ref
+- ref - wrapper ref
 
-| propName   | propType                                   | defaultValue | isRequired |
-| ---------- | ------------------------------------------ | ------------ | ---------- |
-| minHeight  | number                                     | -            | -          |
-| maxLength  | number                                     | -            | -          |
-| title      | string                                     | -            | -          |
-| subTitle   | string                                     | -            | -          |
-| error      | string                                     | -            | -          |
-| disabled   | boolean                                    | -            | -          |
-| onChange   | React.FormEvent                            | -            | -          |
-| inputProps | React.HTMLAttributes (HTMLTextAreaElement) | -            | -          |
-| ref        | React.RefObject                            | -            | -          |
+| propName     | propType                              | defaultValue | isRequired |
+| ------------ | ------------------------------------- | ------------ | ---------- |
+| title        | string                                | -            | -          |
+| subTitle     | string                                | -            | -          |
+| error        | string                                | -            | -          |
+| wrapperProps | React.HTMLAttributes (HTMLDivElement) | -            | -          |
+| inputProps   | React.InputHTMLAttributes             | -            | -          |
+| ref          | React.RefObject                       | -            | -          |

@@ -3,7 +3,7 @@
 Stamp component
 
 ```js
-import { Stamp, StampProps } from '@panenco/pui';
+import { Stamp, StampProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

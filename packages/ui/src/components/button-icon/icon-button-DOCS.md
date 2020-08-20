@@ -3,7 +3,7 @@
 Button icon component
 
 ```js
-import { ButtonIcon, ButtonIconProps } from '@panenco/pui';
+import { ButtonIcon, ButtonIconProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

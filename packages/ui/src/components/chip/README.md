@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { Chip } from '@panenco/pui';
+import { Chip } from '@panenco/ui';
 
 const render  = () => {
   const [isChecked, setChecked] = React.useState(false);

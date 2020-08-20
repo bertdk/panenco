@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { toast, NotificationContainer, PrimaryButton } from '@panenco/pui';
+import { toast, NotificationContainer, PrimaryButton } from '@panenco/ui';
 
 const render = () => {
   return (

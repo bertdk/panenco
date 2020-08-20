@@ -30,8 +30,8 @@ yarn add @panenco/ui
 
 To start importing and using components in your project, you need:
 
-- Import css of **Panenco UI** from `@panenco/pui/lib/styles.css`. It could be any way of global import of styles into your project. For instance, using `import` in js with propper loader or using `@import` in your `css`.
-- Include Panenco UI icons by importing `@panenco/pui/lib/spritesheet.svg` as file (to obtain it's URL and be able to inject it to DOM asyncronously) and pass it to `injectIcons` function as shown below.
+- Import css of **Panenco UI** from `@panenco/ui/lib/styles.css`. It could be any way of global import of styles into your project. For instance, using `import` in js with propper loader or using `@import` in your `css`.
+- Include Panenco UI icons by importing `@panenco/ui/lib/spritesheet.svg` as file (to obtain it's URL and be able to inject it to DOM asyncronously) and pass it to `injectIcons` function as shown below.
 - Wrap your application with `ThemeProvider` component from `@panenco/ui` and pass theme and mode to it (optionally).
 
 ```javascript
@@ -41,8 +41,8 @@ import AppContainers from 'containers';
 import { ThemeProvider, injectIcons } from '@panenco/ui';
 import { theme } from './theme';
 
-import '@panenco/pui/lib/styles.css';
-import svgSprite from '!file-loader!@panenco/pui/lib/spritesheet.svg';
+import '@panenco/ui/lib/styles.css';
+import svgSprite from '!file-loader!@panenco/ui/lib/spritesheet.svg';
 
 injectIcons(svgSprite);
 

@@ -2,7 +2,13 @@ import React from 'react';
 
 // import PaginationReadme from 'components/pagination/README.md';
 
-import { CookiesBanner, UnsupportedBanner, AndroidInstall, IosInstall, NewVersion } from 'components';
+import {
+  CookiesBanner,
+  UnsupportedBanner,
+  // AndroidInstall,
+  // IosInstall,
+  // NewVersion,
+} from 'components';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -53,43 +59,43 @@ export default decorator('Banners', '', '')
         />
       </WrappedComponent>
     );
-  })
-  .add('Android Install', () => {
-    return (
-      <WrappedComponent>
-        <Lipsum />
-        <AndroidInstall
-          onInstall={() => {
-            alert('Installing app');
-          }}
-          iconSrc="https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-512.png"
-          portalContainer={document.getElementById('portal')}
-        />
-      </WrappedComponent>
-    );
-  })
-  .add('iOS Install', () => {
-    return (
-      <WrappedComponent>
-        <IosInstall
-          iconSrc="https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-512.png"
-          portalContainer={document.getElementById('portal')}
-        />
-      </WrappedComponent>
-    );
-  })
-  .add('New Version', () => {
-    return (
-      <WrappedComponent>
-        <NewVersion
-          onUpdate={() => {
-            alert('Updating app');
-          }}
-          onCanel={() => {
-            alert('You ignored an update');
-          }}
-          portalContainer={document.getElementById('portal')}
-        />
-      </WrappedComponent>
-    );
   });
+// .add('Android Install', () => {
+//   return (
+//     <WrappedComponent>
+//       <Lipsum />
+//       <AndroidInstall
+//         onInstall={() => {
+//           alert('Installing app');
+//         }}
+//         iconSrc="https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-512.png"
+//         portalContainer={document.getElementById('portal')}
+//       />
+//     </WrappedComponent>
+//   );
+// });
+// .add('iOS Install', () => {
+//   return (
+//     <WrappedComponent>
+//       <IosInstall
+//         iconSrc="https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-512.png"
+//         portalContainer={document.getElementById('portal')}
+//       />
+//     </WrappedComponent>
+//   );
+// })
+// .add('New Version', () => {
+//   return (
+//     <WrappedComponent>
+//       <NewVersion
+//         onUpdate={() => {
+//           alert('Updating app');
+//         }}
+//         onCanel={() => {
+//           alert('You ignored an update');
+//         }}
+//         portalContainer={document.getElementById('portal')}
+//       />
+//     </WrappedComponent>
+//   );
+// });

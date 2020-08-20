@@ -17,7 +17,6 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
   (
     {
       checked,
-      onClick,
       children,
       disabled,
       className,
@@ -42,10 +41,9 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     return (
       <StyledChip
         type="button"
-        role="switch" 
+        role="switch"
         aria-checked={checked}
         disabled={disabled}
-        onClick={onClick}
         checked={checked}
         className={cx(disabled && 'chipDisabled', className)}
         style={style}

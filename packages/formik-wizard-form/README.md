@@ -65,7 +65,7 @@ There are couple different steps containers definitions examples below. For step
 import React from 'react';
 import { Form } from 'formik';
 import Field from '@panenco/formik-form-field';
-import { PrimaryButton, TextInput, SelectInput } from '@panenco/pui';
+import { PrimaryButton, TextInput, SelectInput } from '@panenco/ui';
 
 export const PhilosophersStone = () => {
   return (
@@ -232,7 +232,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```javascript
 import React from 'react';
 import { WizardForm, useWizardContext } from '@panenco/formik-wizard-form';
-import { SecondaryButton } from '@panenco/pui';
+import { SecondaryButton } from '@panenco/ui';
 
 import * as HarryPotterAnd from './steps';
 
@@ -297,7 +297,7 @@ import * as HarryPotterAnd from './steps';
 const WizardTrack = () => {
   const { currentStepIndex, stepsMeta, toStep } = useWizardContext();
 
-  const handleStepClick = step => () => toStep(step);
+  const handleStepClick = (step) => () => toStep(step);
 
   return (
     <div style={{ display: 'flex' }}>

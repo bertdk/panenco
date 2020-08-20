@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { AutoComplete } from '@panenco/pui';
+import { AutoComplete } from '@panenco/ui';
 
 const options = [
   { label: 'Chip', value: '1' },

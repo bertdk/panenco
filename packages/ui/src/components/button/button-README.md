@@ -4,7 +4,7 @@
 
 ```js
 ...
-import { PrimaryButton, SecondaryButton, Button } from '@panenco/pui';
+import { PrimaryButton, SecondaryButton, Button } from '@panenco/ui';
 
 const render = () => {
   return (

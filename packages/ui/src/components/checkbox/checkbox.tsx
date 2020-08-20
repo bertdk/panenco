@@ -7,18 +7,16 @@ import { InputPropsType } from 'utils/types';
 import { idGenerator } from 'utils/helpers';
 import { StyledLabel } from './style';
 
-export interface CheckboxProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  checked?: boolean;
-  onClick?: (e?: React.UIEvent) => void;
-  disabled?: boolean;
+interface WrapperProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  [key: string]: any;
+}
+
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  id?: string;
-  inputProps?: InputPropsType;
-  name?: string;
-  value?: string;
-  onChange: (e?: React.FormEvent) => void;
   color?: string;
   borderWidth?: string | number;
+  inputProps?: InputPropsType; // will be removed in next version
+  wrapperProps?: WrapperProps;
 }
 
 // interface CompoundedComponent
@@ -27,22 +25,10 @@ export interface CheckboxProps extends React.LabelHTMLAttributes<HTMLLabelElemen
 // }
 
 export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
-  (props: CheckboxProps, ref): JSX.Element => {
-    const {
-      name,
-      value,
-      label,
-      className,
-      checked,
-      disabled,
-      id,
-      onClick,
-      inputProps,
-      onChange,
-      color,
-      borderWidth,
-      ...otherProps
-    } = props;
+  (
+    { label, className, checked, disabled, id, inputProps, color, borderWidth, wrapperProps, ...props }: CheckboxProps,
+    ref,
+  ): JSX.Element => {
     const uniqueID = idGenerator();
     const defaultId = id || uniqueID;
     const theme = useTheme();
@@ -50,14 +36,14 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
 
     return (
       <StyledLabel
-        className={cx('label', disabled && 'labelDisabled', className)}
+        className={cx('label', disabled && 'labelDisabled', wrapperProps?.className)}
         htmlFor={id || defaultId}
         theme={theme}
         mode={mode}
         ref={ref}
         color={color}
         borderWidth={borderWidth}
-        {...otherProps}
+        {...wrapperProps}
       >
         <input
           className={cx('checkbox', className)}
@@ -65,11 +51,8 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
           id={id || defaultId}
           disabled={disabled}
           checked={checked}
-          onClick={onClick}
-          onChange={onChange}
-          value={value}
-          name={name}
           {...inputProps}
+          {...props}
         />
         <div className="container">{checked && <Icon icon={Icon.icons.check} className="tick" />}</div>
         {label && (

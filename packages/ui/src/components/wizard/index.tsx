@@ -18,6 +18,10 @@ const steps = [
     title: 'Data sources',
     stepIndex: 1,
   },
+  {
+    title: 'Loooooooong Title',
+    stepIndex: 2,
+  },
 ];
 
 export const WizardTrack = ({ stepsMeta = steps, currentStepIndex = 0, ...props }: WizardTrackProps): JSX.Element => {

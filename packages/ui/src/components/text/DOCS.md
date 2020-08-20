@@ -3,7 +3,7 @@
 Common application text.
 
 ```js
-import { Text, TextProps } from '@panenco/pui';
+import { Text, TextProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

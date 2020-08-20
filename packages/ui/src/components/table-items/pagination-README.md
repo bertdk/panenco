@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import { PaginationSelect } from '@panenco/pui';
+import { PaginationSelect } from '@panenco/ui';
 <Row>
   <Col s="12">
     <PaginationSelect
@@ -15,5 +15,5 @@ import { PaginationSelect } from '@panenco/pui';
       }}
     />
   </Col>
-</Row>
+</Row>;
 ```

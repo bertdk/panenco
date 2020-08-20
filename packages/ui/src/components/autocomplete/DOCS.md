@@ -3,7 +3,7 @@
 AutoComplete Input component.
 
 ```js
-import { AutoComplete, AutoCompleteProps } from '@panenco/pui';
+import { AutoComplete, AutoCompleteProps } from '@panenco/ui';
 ```
 
 <!-- STORY -->

@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-import { Radio } from '@panenco/pui';
+import { Radio } from '@panenco/ui';
 
 return (
   <>
@@ -19,16 +19,21 @@ return (
 
 ### Properties
 
-This component inherits the attributes of the **label** element and extends the functionality with next properties.
+This component inherits the attributes of the **input** element and extends the functionality with next properties.
 
-| propName   | propType                                | defaultValue | isRequired |
-| ---------- | --------------------------------------- | ------------ | ---------- |
-| label      | string                                  | -            | -          |
-| name       | string                                  | -            | -          |
-| id         | string                                  | -            | -          |
-| value      | string                                  | -            | -          |
-| error      | string                                  | -            | -          |
-| disabled   | boolean                                 | -            | -          |
-| checked    | boolean                                 | -            | -          |
-| ref        | React.RefObject                         | -            | -          |
-| inputProps | React.HTMLAttributes (HTMLInputElement) | -            | -          |
+- id - component id (generate unique id by default);
+- label - component label;
+- error - add this prop when smth went wrong;
+- wrapperProps - it's props which will be added to wrapper component;
+- inputProps - it's props which will be added to input component;
+- wrapperProps - it's props which will be added to wrapper component;
+- ref - wrapper ref
+
+| propName     | propType                  | defaultValue      | isRequired |
+| ------------ | ------------------------- | ----------------- | ---------- |
+| error        | string                    | -                 | -          |
+| label        | string                    | -                 | -          |
+| id           | string or (any)           | generate uniqueID | -          |
+| inputProps   | React.InputHTMLAttributes | -                 | -          |
+| wrapperProps | React.LabelHTMLAttributes | -                 | -          |
+| ref          | React.RefObject           | -                 | -          |

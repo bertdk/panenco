@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import { Text, useTheme } from '@panenco/pui';
+import { Text, useTheme } from '@panenco/ui';
 
 render() {
   const theme = useTheme();
@@ -17,7 +17,7 @@ render() {
 
 ### Properties
 
-- `size` - font size
+- `size` - font size ( you can using it like size={theme.size.s} from your own theme or just size="s" from default theme from ui)
 - `weight` - font weight
 - `color` - font color
 - `children` - text content
