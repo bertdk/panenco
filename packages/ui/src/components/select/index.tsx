@@ -62,6 +62,7 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       components: propComponents,
       styles,
       chipIconSize,
+      loadingMessage,
       ...props
     }: SelectInputProps,
     ref,
@@ -130,7 +131,9 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
             // TODO: should refactore
             onChange={(isMulti && handleChange) || onChange}
             value={isMulti && null}
-            loadingMessage="Loading..."
+            loadingMessage={
+              loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
+            }
             styles={{ ...customStyles(theme, mode, error, styles) }}
             components={{ Option: CustomOption, ...propComponents }}
             noOptionsMessage={noOptionsMessage}
