@@ -63,6 +63,8 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       styles,
       chipIconSize,
       loadingMessage,
+      noOptionsMessage,
+      value,
       ...props
     }: SelectInputProps,
     ref,
@@ -100,7 +102,6 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       SelectComponent = AsyncCreatableSelect;
     }
 
-    const noOptionsMessage = (): string => `Not found`;
     const isOptionDisabled = (option: any): boolean => option.isdisabled;
     return (
       <StyledSelectWrapper
@@ -130,13 +131,13 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
             isDisabled={isDisabled}
             // TODO: should refactore
             onChange={(isMulti && handleChange) || onChange}
-            value={isMulti && null}
+            value={value || (isMulti && null)}
             loadingMessage={
               loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
             }
             styles={{ ...customStyles(theme, mode, error, styles) }}
             components={{ Option: CustomOption, ...propComponents }}
-            noOptionsMessage={noOptionsMessage}
+            noOptionsMessage={noOptionsMessage || (() => `Not found`)}
             isOptionDisabled={isOptionDisabled}
             error={error}
             {...props}
