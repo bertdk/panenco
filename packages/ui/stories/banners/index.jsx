@@ -73,7 +73,7 @@ export default decorator('Banners', '', '')
 //       />
 //     </WrappedComponent>
 //   );
-// });
+// })
 // .add('iOS Install', () => {
 //   return (
 //     <WrappedComponent>

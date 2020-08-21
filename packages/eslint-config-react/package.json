@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "ESlint configuration for @panenco projects",
   "author": "Panenco <info@panenco.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "index.js",
   "repository": "git@github.com:Panenco/panenco.git",
   "publishConfig": {

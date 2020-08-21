@@ -15,7 +15,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   options?: any;
 }
 
-const options1 = [
+const defaultOptions = [
   { label: '12', value: '12' },
   { label: '24', value: '24' },
   { label: '36', value: '36' },
@@ -37,7 +37,7 @@ export const PaginationSelect = ({
   currentPage: currentPageProp = 0,
   className,
   disabled = false,
-  options = options1,
+  options = defaultOptions,
   ...otherProps
 }: PaginationProps): JSX.Element => {
   const [perPage, setPerPage] = React.useState(perPageProp);
@@ -68,7 +68,7 @@ export const PaginationSelect = ({
         isSearchable={false}
         styles={additionStyles()}
         onChange={(option): void => setPerPage(option.value)}
-        value={options1.find((option) => Number(option.value) === Number(perPage))}
+        value={options.find((option) => Number(option.value) === Number(perPage))}
       />
       <Text size={theme.typography.sizes.s} color={theme.colors.secondary} className="paginationText">
         {`${totalItems > 0 ? from : 0}-${to} of ${totalItems}`}
