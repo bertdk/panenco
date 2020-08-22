@@ -63,7 +63,7 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
             <input
               type={type}
               aria-label={`${title || ''}${subTitle || ''}`}
-              className="input"
+              className={cx('input', className)}
               placeholder={placeholder}
               disabled={disabled}
               {...inputProps}

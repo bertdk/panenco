@@ -41,6 +41,19 @@ export interface SelectInputProps extends SelectProps, InputComponent {
   creatable?: boolean;
   selectWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
   chipIconSize?: number | string;
+  chipIcon?: any;
+  chipTextWeight?: string;
+  chipTextSize?: {
+    textSize: string;
+    lineHeight: string;
+  };
+  chipTextTypography?: {
+    size: {
+      textSize: string;
+      lineHeight: string;
+    };
+    weight: string;
+  };
   onDeleteOption?: any;
   wrapperSelectSizes?: {
     l?: number | string;
@@ -67,10 +80,14 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       creatable,
       components: propComponents,
       styles,
-      chipIconSize,
       loadingMessage,
       noOptionsMessage,
       onDeleteOption,
+      chipIconSize,
+      chipIcon,
+      chipTextSize,
+      chipTextWeight,
+      chipTextTypography,
       value,
       wrapperSelectSizes = {
         l: 12,
@@ -187,13 +204,16 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
                   <Chip
                     className="multiSelectChip"
                     key={activeOption.value}
-                    icon={Icon.icons.x}
+                    icon={chipIcon || Icon.icons.x}
                     checked
                     onIconClick={(): void => {
                       setOption(activeOptions.filter((option) => option.value !== activeOption.value));
                       if (onDeleteOption) onDeleteOption(activeOption);
                     }}
                     iconSize={chipIconSize}
+                    textSize={chipTextSize}
+                    textWeight={chipTextWeight}
+                    textTypography={chipTextTypography}
                   >
                     {activeOption.label}
                   </Chip>

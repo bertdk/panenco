@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectInput, Row, Col } from 'components';
+import { SelectInput, Row, Col, Icon } from 'components';
 import SelectInputDocs from 'components/select/DOCS.md';
 import README from 'components/select/README.md';
 import { decorator } from '../../utils/decorator';

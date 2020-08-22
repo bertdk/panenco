@@ -208,12 +208,16 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
 });
 
 export const StyledSelectWrapper = styled.div`
-  width: ${(props: any): string => {
-    if (props.error) {
-      return '100%';
-    }
-    return 'calc(100% - 24px)';
-  }};
+  .wrapperSelect {
+    display: flex;
+    width: ${(props: any): string => {
+      if (props.error) {
+        return '100%';
+      }
+      return 'calc(100% - 24px)';
+    }};
+  }
+
   .isMultiActiveChips {
     display: flex;
     flex-wrap: wrap;
@@ -250,14 +254,10 @@ export const StyledSelectWrapper = styled.div`
     margin-right: 24px;
   }
 
-  .wrapperSelect {
-    display: flex;
-  }
-
   .errorIconWrapper {
     align-items: center;
     display: flex;
-    min-width: 24px;
+    width: 24px;
     padding-left: 8px;
     flex-shrink: 0;
   }
@@ -276,7 +276,10 @@ export const StyledSelectWrapper = styled.div`
   }
 
   @media (max-width: ${breakpoints.l}) {
-    width: 100%;
+    .wrapperSelect {
+      width: 100%;
+    }
+
     .errorIconWrapper {
       display: none;
       /* opacity: 0; */
