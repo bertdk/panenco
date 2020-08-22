@@ -41,6 +41,7 @@ export interface SelectInputProps extends SelectProps, InputComponent {
   creatable?: boolean;
   selectWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
   chipIconSize?: number | string;
+  onDeleteOption?: any;
 }
 
 export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
@@ -64,7 +65,9 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       chipIconSize,
       loadingMessage,
       noOptionsMessage,
+      onDeleteOption,
       value,
+      filterOption,
       ...props
     }: SelectInputProps,
     ref,
@@ -102,6 +105,12 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       SelectComponent = AsyncCreatableSelect;
     }
 
+    const customFilterOption = (option, input): boolean => {
+      if (input) {
+        return option.label.includes(input);
+      }
+      return true;
+    };
     const isOptionDisabled = (option: any): boolean => option.isdisabled;
     return (
       <StyledSelectWrapper
@@ -139,6 +148,7 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
             components={{ Option: CustomOption, ...propComponents }}
             noOptionsMessage={noOptionsMessage || (() => `Not found`)}
             isOptionDisabled={isOptionDisabled}
+            filterOption={filterOption || customFilterOption}
             error={error}
             {...props}
           />
@@ -166,6 +176,7 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
                     checked
                     onIconClick={(): void => {
                       setOption(activeOptions.filter((option) => option.value !== activeOption.value));
+                      if (onDeleteOption) onDeleteOption(activeOption);
                     }}
                     iconSize={chipIconSize}
                   >

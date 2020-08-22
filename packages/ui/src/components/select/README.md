@@ -55,6 +55,8 @@ This component base on [**react-select**](https://react-select.com/home) library
 - title - set component title;
 - subTitle - set component subtitle;
 - selectWrapperProps - object which should add if you want extends some functionality;
+- onDeleteOption - function which will be called on click by chip's close icon (for multi select)
+- filterOption - custom method to filter whether an option should be displayed in the menu (by default, filtration is performed by option label);
 - ref - ref;
 
 Else you can using Async, Creatable and AsyncCreatable Select with next props
@@ -63,17 +65,19 @@ Else you can using Async, Creatable and AsyncCreatable Select with next props
 - creatable - use Creatable Select;
 - async + creatable - use AsyncCreatable Select;
 
-| propName           | propType                              | defaultValue | isRequired |
-| ------------------ | ------------------------------------- | ------------ | ---------- |
-| placeholder        | string                                | Select...    | -          |
-| error              | string                                | -            | -          |
-| title              | string                                | -            | -          |
-| subTitle           | string                                | -            | -          |
-| isDisabled         | boolean                               | -            | -          |
-| isMulti            | boolean                               | -            | -          |
-| async              | boolean                               | -            | -          |
-| creatable          | boolean                               | -            | -          |
-| selectWrapperProps | React.HTMLAttributes (HTMLDivElement) | -            | -          |
-| ref                | React.RefObject                       | -            | -          |
+| propName           | propType                                          | defaultValue | isRequired |
+| ------------------ | ------------------------------------------------- | ------------ | ---------- |
+| placeholder        | string                                            | Select...    | -          |
+| error              | string                                            | -            | -          |
+| title              | string                                            | -            | -          |
+| subTitle           | string                                            | -            | -          |
+| isDisabled         | boolean                                           | -            | -          |
+| isMulti            | boolean                                           | -            | -          |
+| async              | boolean                                           | -            | -          |
+| creatable          | boolean                                           | -            | -          |
+| selectWrapperProps | React.HTMLAttributes (HTMLDivElement)             | -            | -          |
+| filterOption       | ({data, label, value}, string) => boolean or null | -            | -          |
+| onDeleteOption     | function                                          | -            | -          |
+| ref                | React.RefObject                                   | -            | -          |
 
 It's a basic props what we using, you can look more complete documentation [**here**](https://react-select.com/home)

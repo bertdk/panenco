@@ -29,7 +29,6 @@ export const Button = React.forwardRef<any, ButtonProps>(
       iconLeft,
       iconRight,
       tabIndex,
-      onClick,
       ...props
     }: ButtonProps,
     ref,
@@ -46,7 +45,6 @@ export const Button = React.forwardRef<any, ButtonProps>(
         theme={theme}
         mode={mode}
         ref={ref}
-        onClick={onClick}
         {...props}
         to={component === 'link' ? to : null}
         tabIndex={tabIndex || (disabled && component === 'link') ? -1 : null}
