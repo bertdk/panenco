@@ -224,15 +224,15 @@ export const StyledSelectWrapper = styled.div`
     margin: 10px 4px 0 0;
   }
 
-  .row {
-    margin: 0;
-    padding: 0;
+  /* TODO - suggestion with priority ? */
+  .row,
+  .col {
+    margin: 0 !important ;
+    padding: 0 !important;
   }
 
   .col {
     position: relative;
-    margin: 0;
-    padding: 0;
   }
 
   .title {
