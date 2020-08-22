@@ -35,7 +35,7 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
 
     return (
       <StyledTextInput
-        className={cx('textInput', wrapperProps?.className)}
+        className={cx('textInput', className)}
         error={error}
         theme={theme}
         mode={mode}
@@ -63,7 +63,7 @@ export const TextInput = React.forwardRef<HTMLDivElement, TextInputProps>(
             <input
               type={type}
               aria-label={`${title || ''}${subTitle || ''}`}
-              className={cx('input', className)}
+              className="input"
               placeholder={placeholder}
               disabled={disabled}
               {...inputProps}

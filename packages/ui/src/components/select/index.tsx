@@ -139,6 +139,80 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       return true;
     };
     const isOptionDisabled = (option: any): boolean => option.isdisabled;
+
+    const Component = () => (
+      <>
+        {title && (
+          <Text className="title" weight={theme.typography.weights.bold}>
+            {title}
+          </Text>
+        )}
+        {subTitle && (
+          <Text className="subTitle" size={theme.typography.sizes.xs} color={theme.colors.secondary}>
+            {subTitle}
+          </Text>
+        )}
+        <div className="wrapperSelect">
+          <SelectComponent
+            options={options}
+            activeOptions={isMulti && activeOptions}
+            placeholder={placeholder}
+            isDisabled={isDisabled}
+            // TODO: should refactore
+            onChange={(isMulti && handleChange) || onChange}
+            value={value || (isMulti && null)}
+            loadingMessage={
+              loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
+            }
+            styles={{ ...customStyles(theme, mode, error, styles) }}
+            components={{ Option: CustomOption, ...propComponents }}
+            noOptionsMessage={noOptionsMessage || (() => `Not found`)}
+            isOptionDisabled={isOptionDisabled}
+            filterOption={filterOption || customFilterOption}
+            error={error}
+            {...props}
+          />
+          {error && (
+            <div className="errorIconWrapper">
+              <Icon className="errorIcon" icon={Icon.icons.close} />
+            </div>
+          )}
+        </div>
+        {error && (
+          <Text className="errorTitle" size={theme.typography.sizes.xs} color={theme.colors.error}>
+            {error}
+          </Text>
+        )}
+      </>
+    );
+
+    const ChipsComponent = () => (
+      <div className="isMultiActiveChips">
+        {activeOptions
+          .sort((a, b) => (a.label > b.label ? 1 : b.label > a.label ? -1 : 0)) // eslint-disable-line
+          .map((activeOption) => {
+            return (
+              <Chip
+                className="multiSelectChip"
+                key={activeOption.value}
+                icon={chipIcon || Icon.icons.x}
+                checked
+                onIconClick={(): void => {
+                  setOption(activeOptions.filter((option) => option.value !== activeOption.value));
+                  if (onDeleteOption) onDeleteOption(activeOption);
+                }}
+                iconSize={chipIconSize}
+                textSize={chipTextSize}
+                textWeight={chipTextWeight}
+                textTypography={chipTextTypography}
+              >
+                {activeOption.label}
+              </Chip>
+            );
+          })}
+      </div>
+    );
+
     return (
       <StyledSelectWrapper
         theme={theme}
@@ -147,79 +221,23 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
         style={style}
         className={className}
         error={error}
+        wrapperSelectSizes={wrapperSelectSizes}
         {...selectWrapperProps}
       >
-        <Row className="row">
-          <Col l={wrapperSelectSizes.l} m={wrapperSelectSizes.m} s={wrapperSelectSizes.s} className="col">
-            {title && (
-              <Text className="title" weight={theme.typography.weights.bold}>
-                {title}
-              </Text>
-            )}
-            {subTitle && (
-              <Text className="subTitle" size={theme.typography.sizes.xs} color={theme.colors.secondary}>
-                {subTitle}
-              </Text>
-            )}
-            <div className="wrapperSelect">
-              <SelectComponent
-                options={options}
-                activeOptions={isMulti && activeOptions}
-                placeholder={placeholder}
-                isDisabled={isDisabled}
-                // TODO: should refactore
-                onChange={(isMulti && handleChange) || onChange}
-                value={value || (isMulti && null)}
-                loadingMessage={
-                  loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
-                }
-                styles={{ ...customStyles(theme, mode, error, styles) }}
-                components={{ Option: CustomOption, ...propComponents }}
-                noOptionsMessage={noOptionsMessage || (() => `Not found`)}
-                isOptionDisabled={isOptionDisabled}
-                filterOption={filterOption || customFilterOption}
-                error={error}
-                {...props}
-              />
-              {error && (
-                <div className="errorIconWrapper">
-                  <Icon className="errorIcon" icon={Icon.icons.close} />
-                </div>
-              )}
-            </div>
-          </Col>
-        </Row>
-
-        {error && (
-          <Text className="errorTitle" size={theme.typography.sizes.xs} color={theme.colors.error}>
-            {error}
-          </Text>
-        )}
-        {isMulti && activeOptions?.length > 0 && (
-          <div className="isMultiActiveChips">
-            {activeOptions
-              .sort((a, b) => (a.label > b.label ? 1 : b.label > a.label ? -1 : 0)) // eslint-disable-line
-              .map((activeOption) => {
-                return (
-                  <Chip
-                    className="multiSelectChip"
-                    key={activeOption.value}
-                    icon={chipIcon || Icon.icons.x}
-                    checked
-                    onIconClick={(): void => {
-                      setOption(activeOptions.filter((option) => option.value !== activeOption.value));
-                      if (onDeleteOption) onDeleteOption(activeOption);
-                    }}
-                    iconSize={chipIconSize}
-                    textSize={chipTextSize}
-                    textWeight={chipTextWeight}
-                    textTypography={chipTextTypography}
-                  >
-                    {activeOption.label}
-                  </Chip>
-                );
-              })}
-          </div>
+        {wrapperSelectSizes ? (
+          <>
+            <Row className="row">
+              <Col l={wrapperSelectSizes.l} m={wrapperSelectSizes.m} s={wrapperSelectSizes.s} className="col">
+                <Component />
+              </Col>
+            </Row>
+            {isMulti && activeOptions?.length > 0 && <ChipsComponent />}
+          </>
+        ) : (
+          <>
+            <Component />
+            {isMulti && activeOptions?.length > 0 && <ChipsComponent />}
+          </>
         )}
       </StyledSelectWrapper>
     );

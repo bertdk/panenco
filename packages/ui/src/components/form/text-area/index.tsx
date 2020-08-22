@@ -67,7 +67,7 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
 
     return (
       <StyledTextArea
-        className={cx('textArea', wrapperProps?.className)}
+        className={cx('textArea', className)}
         error={error}
         theme={theme}
         mode={mode}
@@ -89,7 +89,7 @@ export const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(
           <div className="withErrorWrapperContent">
             <textarea
               aria-label={createAriaLabel()}
-              className={cx('input', error && 'inputError', disabled && 'inputDisabled', className)}
+              className={cx('input', error && 'inputError', disabled && 'inputDisabled')}
               ref={useCombinedrefs}
               onChange={handleChange}
               maxLength={maxLength}

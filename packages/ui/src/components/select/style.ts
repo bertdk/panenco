@@ -222,17 +222,13 @@ export const StyledSelectWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: ${(props): string => {
+      return props.wrapperSelectSizes ? '-10px' : '0';
+    }};
   }
 
   .multiSelectChip {
     margin: 10px 4px 0 0;
-  }
-
-  /* TODO - suggestion with priority ? */
-  .row,
-  .col {
-    margin: 0 !important ;
-    padding: 0 !important;
   }
 
   .col {
