@@ -224,6 +224,17 @@ export const StyledSelectWrapper = styled.div`
     margin: 10px 4px 0 0;
   }
 
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .col {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
   .title {
     color: ${(props: any): string =>
       props.mode === ThemeMode.dark ? props.theme.colors.light : props.theme.colors.primary};

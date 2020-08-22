@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/async';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { useTheme, useMode } from 'utils/hooks';
 import { InputComponent } from 'utils/types';
-import { Icon, Chip, Text } from 'components';
+import { Icon, Chip, Text, Row, Col } from 'components';
 import { customStyles, StyledSelectWrapper } from './style';
 
 const CustomOption = (props: any): JSX.Element => {
@@ -42,6 +42,11 @@ export interface SelectInputProps extends SelectProps, InputComponent {
   selectWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
   chipIconSize?: number | string;
   onDeleteOption?: any;
+  wrapperSelectSizes?: {
+    l?: number | string;
+    m?: number | string;
+    s?: number | string;
+  };
 }
 
 export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
@@ -67,6 +72,11 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
       noOptionsMessage,
       onDeleteOption,
       value,
+      wrapperSelectSizes = {
+        l: 12,
+        m: 8,
+        s: 4,
+      },
       filterOption,
       ...props
     }: SelectInputProps,
@@ -122,42 +132,47 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
         error={error}
         {...selectWrapperProps}
       >
-        {title && (
-          <Text className="title" weight={theme.typography.weights.bold}>
-            {title}
-          </Text>
-        )}
-        {subTitle && (
-          <Text className="subTitle" size={theme.typography.sizes.xs} color={theme.colors.secondary}>
-            {subTitle}
-          </Text>
-        )}
-        <div className="wrapperSelect">
-          <SelectComponent
-            options={options}
-            activeOptions={isMulti && activeOptions}
-            placeholder={placeholder}
-            isDisabled={isDisabled}
-            // TODO: should refactore
-            onChange={(isMulti && handleChange) || onChange}
-            value={value || (isMulti && null)}
-            loadingMessage={
-              loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
-            }
-            styles={{ ...customStyles(theme, mode, error, styles) }}
-            components={{ Option: CustomOption, ...propComponents }}
-            noOptionsMessage={noOptionsMessage || (() => `Not found`)}
-            isOptionDisabled={isOptionDisabled}
-            filterOption={filterOption || customFilterOption}
-            error={error}
-            {...props}
-          />
-          {error && (
-            <div className="errorIconWrapper">
-              <Icon className="errorIcon" icon={Icon.icons.close} />
+        <Row className="row">
+          <Col l={wrapperSelectSizes.l} m={wrapperSelectSizes.m} s={wrapperSelectSizes.s} className="col">
+            {title && (
+              <Text className="title" weight={theme.typography.weights.bold}>
+                {title}
+              </Text>
+            )}
+            {subTitle && (
+              <Text className="subTitle" size={theme.typography.sizes.xs} color={theme.colors.secondary}>
+                {subTitle}
+              </Text>
+            )}
+            <div className="wrapperSelect">
+              <SelectComponent
+                options={options}
+                activeOptions={isMulti && activeOptions}
+                placeholder={placeholder}
+                isDisabled={isDisabled}
+                // TODO: should refactore
+                onChange={(isMulti && handleChange) || onChange}
+                value={value || (isMulti && null)}
+                loadingMessage={
+                  loadingMessage || (({ inputValue }): string => (inputValue ? `Loading ${inputValue}` : 'Loading...'))
+                }
+                styles={{ ...customStyles(theme, mode, error, styles) }}
+                components={{ Option: CustomOption, ...propComponents }}
+                noOptionsMessage={noOptionsMessage || (() => `Not found`)}
+                isOptionDisabled={isOptionDisabled}
+                filterOption={filterOption || customFilterOption}
+                error={error}
+                {...props}
+              />
+              {error && (
+                <div className="errorIconWrapper">
+                  <Icon className="errorIcon" icon={Icon.icons.close} />
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </Col>
+        </Row>
+
         {error && (
           <Text className="errorTitle" size={theme.typography.sizes.xs} color={theme.colors.error}>
             {error}

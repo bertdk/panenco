@@ -57,6 +57,7 @@ This component base on [**react-select**](https://react-select.com/home) library
 - selectWrapperProps - object which should add if you want extends some functionality;
 - onDeleteOption - function which will be called on click by chip's close icon (for multi select)
 - filterOption - custom method to filter whether an option should be displayed in the menu (by default, filtration is performed by option label);
+- wrapperSelectSizes - object which contain 3 property l, m and s (independ from grid layout) and set size for input element;
 - ref - ref;
 
 Else you can using Async, Creatable and AsyncCreatable Select with next props
@@ -77,7 +78,7 @@ Else you can using Async, Creatable and AsyncCreatable Select with next props
 | creatable          | boolean                                           | -            | -          |
 | selectWrapperProps | React.HTMLAttributes (HTMLDivElement)             | -            | -          |
 | filterOption       | ({data, label, value}, string) => boolean or null | -            | -          |
-| onDeleteOption     | function                                          | -            | -          |
+| onDeleteOption     | (option) => void                                  | -            | -          |
 | ref                | React.RefObject                                   | -            | -          |
 
 It's a basic props what we using, you can look more complete documentation [**here**](https://react-select.com/home)

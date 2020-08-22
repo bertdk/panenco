@@ -48,7 +48,7 @@ export default decorator('Select', SelectInputDocs, README).add('Select componen
           />
         </Col>
       </Row>
-      <Row style={{ justifyContent: 'space-around', alignItems: 'flex-start' }}>
+      <Row style={{ justifyContent: 'space-around', alignItems: 'center' }}>
         <Col s="2" m="4" l="4">
           <SelectInput title="Select with Error" error="Error options" />
         </Col>
@@ -57,8 +57,15 @@ export default decorator('Select', SelectInputDocs, README).add('Select componen
         </Col>
       </Row>
       {/* <Row>
-        <Col s="2" m="4" l="4">
-          <TextInput error="1" />
+        <Col s="4" m="8" l="12">
+          <SelectInput
+            options={options}
+            title="Wrapper select sizes"
+            isMulti
+            wrapperSelectSizes={{ l: 4, m: 4, s: 2 }}
+            chipIconSize={8}
+            placeholder="Choose many options ..."
+          />
         </Col>
       </Row> */}
     </WrappedComponent>
