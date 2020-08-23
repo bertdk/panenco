@@ -53,8 +53,6 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       onIconClick(e);
     };
 
-    console.log('CHIP', textSize);
-
     return (
       <StyledChip
         type="button"

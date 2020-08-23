@@ -222,9 +222,6 @@ export const StyledSelectWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-top: ${(props): string => {
-      return props.wrapperSelectSizes ? '-10px' : '0';
-    }};
   }
 
   .multiSelectChip {
@@ -233,6 +230,8 @@ export const StyledSelectWrapper = styled.div`
 
   .col {
     position: relative;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   .title {
