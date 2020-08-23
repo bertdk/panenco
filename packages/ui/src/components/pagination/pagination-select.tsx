@@ -5,6 +5,7 @@ import { Text, Icon, Link, SelectInput } from 'components';
 import { StyledPagination } from './styles';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
+  [key: string]: any;
   totalItems?: number;
   onPagination?: () => void;
   perPage?: number;
@@ -32,25 +33,31 @@ const additionStyles = () => ({
 export const PaginationSelect = ({
   contentBeforeSelect = 'Rows per page:',
   totalItems = 48,
-  perPage: perPageProp = 12,
+  perPage = 12,
   formatUrl = (path?: any) => '',
-  currentPage: currentPageProp = 0,
+  currentPage = 0,
   className,
   disabled = false,
   options = defaultOptions,
+  onPagination,
   ...otherProps
 }: PaginationProps): JSX.Element => {
-  const [perPage, setPerPage] = React.useState(perPageProp);
-  const [currentPage, setCurrentPage] = React.useState(currentPageProp);
-  const from = currentPage * perPage;
+  // const [perPage, setPerPage] = React.useState(perPageProp);
+  // const [currentPage, setCurrentPage] = React.useState(currentPageProp);
+  // const from = currentPage * perPage;
 
-  const isFirst = Number(currentPage) <= 0;
-  const isLast = totalItems <= perPage * currentPage + Number(perPage);
-  // const prevValue = currentPage - perPage <= 0 ? 0 : currentPage - perPage;
-  const to = !isLast ? perPage * currentPage + Number(perPage) : totalItems;
+  // const isFirst = Number(currentPage) <= 0;
+  // const isLast = totalItems <= perPage * currentPage + Number(perPage);
+  // // const prevValue = currentPage - perPage <= 0 ? 0 : currentPage - perPage;
+  // const to = !isLast ? perPage * currentPage + Number(perPage) : totalItems;
   const theme = useTheme();
   const { mode } = useMode();
   const prevPage = currentPage > 0 ? currentPage - 1 : 0;
+
+  const from = perPage * currentPage + 1;
+  const isFirst = Number(currentPage) === 0;
+  const isLast = totalItems <= perPage * currentPage + Number(perPage);
+  const to = !isLast ? perPage * currentPage + Number(perPage) : totalItems;
 
   return (
     <StyledPagination mode={mode} theme={theme} className={cx('pagination', className)} {...otherProps}>
@@ -65,9 +72,11 @@ export const PaginationSelect = ({
       <SelectInput
         options={options}
         className="paginationSelect"
+        id="perPage"
+        name="perPage"
         isSearchable={false}
         styles={additionStyles()}
-        onChange={(option): void => setPerPage(option.value)}
+        onChange={onPagination}
         value={options.find((option) => Number(option.value) === Number(perPage))}
       />
       <Text size={theme.typography.sizes.s} color={theme.colors.secondary} className="paginationText">
@@ -75,19 +84,19 @@ export const PaginationSelect = ({
       </Text>
       <Link
         className={cx('paginationButton', (isFirst || disabled) && 'paginationButtonDisabled')}
-        onClick={(): void => {
-          setCurrentPage(prevPage);
-        }}
+        // onClick={(): void => {
+        //   setCurrentPage(prevPage);
+        // }}
         to={formatUrl(prevPage)}
       >
         <Icon icon={Icon.icons.chevronLeft} className="paginationButtonIcon" />
       </Link>
       <Link
         className={cx('paginationButton', (isLast || disabled) && 'paginationButtonDisabled')}
-        onClick={(): void => {
-          setCurrentPage(currentPage + 1);
-        }}
-        to={formatUrl(currentPage + 1)}
+        // onClick={(): void => {
+        //   setCurrentPage(currentPage + 1);
+        // }}
+        to={formatUrl(currentPage + 2)}
       >
         <Icon icon={Icon.icons.chevronRight} className="paginationButtonIcon" />
       </Link>

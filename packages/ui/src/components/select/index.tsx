@@ -134,7 +134,7 @@ export const SelectInput = React.forwardRef<HTMLDivElement, SelectInputProps>(
 
     const customFilterOption = (option, input): boolean => {
       if (input) {
-        return option.label.toLoweCase().includes(input.toLoweCase());
+        return option.label.toLowerCase().includes(input.toLowerCase());
       }
       return true;
     };

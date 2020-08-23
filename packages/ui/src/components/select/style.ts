@@ -112,6 +112,7 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
       value,
       selectProps: { activeOptions },
       isSelected,
+      isFocused,
     } = state;
     const isChoosedOption = !!activeOptions?.some((option) => option.value === value) || isSelected;
     // const notFoundLabel = 'No results found. Add new object';
@@ -123,7 +124,7 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
       if (mode === ThemeMode.light) {
         return isChoosedOption ? theme.colors.accent500 : theme.colors.primary;
       }
-      return theme.colors.light;
+      return isFocused ? theme.colors.primary : theme.colors.light;
     };
     const isHoverColor = (): string => {
       if (mode === ThemeMode.light) {
@@ -132,9 +133,19 @@ export const customStyles = (theme: PUITheme, mode?: string, error?: any, styles
       return theme.colors.primary;
     };
 
+    const isBackgroundColor = (): string => {
+      if (state.isDisabled) {
+        return theme.colors.border;
+      }
+      if (isFocused) {
+        return mode === ThemeMode.dark ? theme.colors.border : theme.colors.background50;
+      }
+      return 'inherit';
+    };
+
     return {
       ...provided,
-      backgroundColor: state.isDisabled ? theme.colors.border : 'inherit',
+      backgroundColor: `${isBackgroundColor()}`,
       color: `${isOptionColor()}`,
       paddingLeft: '25px',
       paddingBottom: '18px',
